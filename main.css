@@ -1,0 +1,28 @@
+:root{
+    --green: #00ff00;
+    --white: #ffffff
+    --black: #000000
+}
+
+body{
+    background-color: cornsilk;
+}
+
+*{
+    color: darkslategray;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.btn{
+    position: absolute;
+    top: 20px;
+    left: 250px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: none;
+    color: aquamarine;
+    background-color: brown;
+}
+
+.btn:focus {outline-style: none;}
