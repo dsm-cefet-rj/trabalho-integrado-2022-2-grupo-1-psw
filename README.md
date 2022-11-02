@@ -1,6 +1,4 @@
-## Available Scripts
-
-  Getting Started
+## Getting Started
 
   * clone this repo
   * open cmd inside the folder and exec ``` npm install ```
