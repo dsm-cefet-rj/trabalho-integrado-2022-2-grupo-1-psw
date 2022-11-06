@@ -1,5 +1,4 @@
 import './styles/App.css';
-
 import {
   BrowserRouter
 } from 'react-router-dom';
@@ -12,11 +11,11 @@ function App() {
   return (
     <BrowserRouter className="App">
       <NavbarComponent />
-
       <Router />
-
     </BrowserRouter>
+    
   );
+
 }
 
 export default App;
