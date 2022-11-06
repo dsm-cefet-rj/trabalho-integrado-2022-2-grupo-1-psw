@@ -25,7 +25,7 @@ function NavbarComponent() {
             <Nav.Link href="Equipes">Equipes</Nav.Link>
             <Nav.Link href="Relatorios">Relatórios</Nav.Link>
             <Nav.Link href="Acesso">Entrar / Registrar-se</Nav.Link>
-            <Nav.Link href="Etapas">ETapas</Nav.Link>
+            <Nav.Link href="Etapas">Etapas</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
