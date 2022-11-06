@@ -22,21 +22,22 @@ function NavbarComponent() {
                 Another action
               </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2"> Example</NavDropdown.Item>
+              
               <NavDropdown.Divider />
               <NavDropdown.Item>
-              </NavDropdown.Item>
+              </NavDropdown.Item></NavDropdown>
+              
             <Nav.Link href="/"></Nav.Link>
             <Nav.Link href="Dashboard">DashBoard</Nav.Link>
             <NavDropdown title="Produtos" id="basic-nav-dropdown">
               <NavDropdown.Item href="Produtos">Todos os Produtos</NavDropdown.Item>
               <NavDropdown.Item href="NovoProduto">Novo Produto</NavDropdown.Item>
-            </NavDropdown>
+              </NavDropdown>
             <Nav.Link href="Cadeias">Cadeias Produtivas</Nav.Link>
             <Nav.Link href="Equipes">Equipes</Nav.Link>
             <Nav.Link href="Relatorios">Relatórios</Nav.Link>
             <Nav.Link href="Acesso">Entrar / Registrar-se</Nav.Link>
             <Nav.Link href="Etapas">Etapas</Nav.Link>
-            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>
