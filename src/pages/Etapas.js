@@ -1,11 +1,22 @@
 import EtapaRow from "../components/etapas/TableEtapas"
-import React from "react"
-import {Table} from "react-bootstrap"
+import React, { useState } from "react"
+import {Button, Table} from "react-bootstrap"
 function Etapas () {
+const [etapas,setEtapas]= useState([])
+  function AdicionarEtapa(){
+    
+
+
+
+  }
     return (
 
       <div className="container mt-4">
-        <h1>Etapas Produtivas</h1>
+        <div className="d-flex flex-row justify-content-between">
+          <h1>Etapas Produtivas</h1>
+          <Button className="mt-2 mb-2">Adicionar</Button>
+          </div>
+
         <Table>
           <thead>
             <tr>
