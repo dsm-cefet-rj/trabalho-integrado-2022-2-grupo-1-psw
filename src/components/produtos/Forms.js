@@ -1,12 +1,12 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-function Forms2() {
+function Forms() {
   return (
     <Form>
-      <Form.Group className="mb-3" controlId="formApelido">
-        <Form.Label>Apelido</Form.Label>
-        <Form.Control type="string" placeholder="Digite o apelido do produto" />
+      <Form.Group className="mb-3" controlId="formNome">
+        <Form.Label>Nome</Form.Label>
+        <Form.Control type="string" placeholder="Digite o nome do produto" />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formCodigo">
@@ -37,4 +37,4 @@ function Forms2() {
   );
 }
 
-export default Forms2;
+export default Forms;

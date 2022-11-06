@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyledEngineProvider } from '@mui/material/styles';
-import Table from '../components/produtos/TableComponent.js'
+import Table from '../components/produtos/Table.js'
 
 function Produtos() {
   return (
