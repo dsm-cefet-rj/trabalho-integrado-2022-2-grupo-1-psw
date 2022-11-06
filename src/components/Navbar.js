@@ -5,25 +5,22 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function NavbarComponent() {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar bg="light" variant="light" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">Follower</Navbar.Brand>
+        <Navbar.Brand href="App">Follower</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
+            <Nav.Link href="/"></Nav.Link>
+            <Nav.Link href="Dashboard">DashBoard</Nav.Link>
+            <NavDropdown title="Produtos" id="basic-nav-dropdown">
+              <NavDropdown.Item href="Produtos">Todos os Produtos</NavDropdown.Item>
+              <NavDropdown.Item href="NovoProduto">Novo Produto</NavDropdown.Item>
             </NavDropdown>
+            <Nav.Link href="Cadeias">Cadeias Produtivas</Nav.Link>
+            <Nav.Link href="Equipes">Equipes</Nav.Link>
+            <Nav.Link href="Relatorios">Relatórios</Nav.Link>
+            <Nav.Link href="Acesso">Entrar / Registrar-se</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
