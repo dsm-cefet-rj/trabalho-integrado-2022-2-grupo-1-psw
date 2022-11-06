@@ -1,12 +1,15 @@
-import Table from '../components/Table.js'
-import '../styles/App.css';
+import * as React from 'react';
+import { StyledEngineProvider } from '@mui/material/styles';
+import Table from '../components/produtos/TableComponent.js'
 
-function Produtos() {  
+function Produtos() {
   return (
-    <div className="Produtos">
+    <div>
       <h1>Produtos</h1>
       <a class="btn btn-primary" href="NovoProduto" role="button">Novo Produto</a>
-        <div className="Table"> <Table/> </div>
+        <StyledEngineProvider injectFirst>
+          <Table />
+        </StyledEngineProvider>
     </div>
   )
 };

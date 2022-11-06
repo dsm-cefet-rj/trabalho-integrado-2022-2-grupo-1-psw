@@ -1,4 +1,5 @@
-import Forms from '../components/Forms.js'
+import Forms from '../components/produtos/Forms.js'
+
 function NovoProduto () {
     return (
       <div>

@@ -1,7 +1,7 @@
 function Table(){
    return (
     <table class="table table-striped table-hover table-bordered">
-        <thead class="thead-dark">
+        <thead class="thead-light">
             <tr>
             <th scope="col">Apelido</th>
             <th scope="col">Código</th>
