@@ -1,57 +1,38 @@
 import React from "react";
-import EquipesRow from '../components/TableEquipes.js';
-import {Modal, Table} from "react-bootstrap"
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import EquipesRow from '../components/equipes/TableEquipes.js';
+import NovaEquipe from "../components/equipes/modalAddEquipe.js";
+import { Table, Button} from "react-bootstrap"
+import {useState} from 'react'
+import {
+  ThemeProvider,
+  StyledEngineProvider,
+  CssBaseline,
+} from '@mui/material';
+
 
 function Equipes () {
-
-  const state = {
-    contador: 1
-  };
-
- function handleClickNovaEquipe ()  {
-    this.setState({contador: 1}, this.soChamaQuandoAtualizar);
+  const [AddEquipe, setAddEquipe] = useState(false)
+  const [equipes, setEquipe] = useState([])
+  function modalAddEquipe() {
+    setAddEquipe(true)
   }
-
-  function soChamaQuandoAtualizar () {
-    console.log(this.state.contador); // assim que clicar, o novo valor já será 1
-  };
-
-
-
+  function modalAddEquipeClose(){
+    setAddEquipe(false)
+  }
+  function novoHandler2(equipe){
+    setAddEquipe([...equipes, equipe])
+  }
   return (
-    <div>
-  <div>
-    <button type="button" class="btn">Filtrar</button>
-</div>
-      <Table>        
-          <thead>
-            <tr>
-              <th>Ordem</th>
-              <th>Nome</th>
-              <th>Código da Equipe</th>
-              <th></th>
-            </tr>
-
-
-          </thead>
-
-            <tbody>
-              <EquipesRow ordem={1} nome={"A"} codigoEquipe={2} /> 
-              <EquipesRow ordem={2} nome={"B"} codigoEquipe= {2}/>
-              <EquipesRow ordem={3} nome={"C"} codigoEquipe= {3}/>
-            
-
-            </tbody>
-
-        </Table>
-  <div class="btn-group mr-2" role="group" aria-label="Primeiro grupo">
-    <button onClick={()=>this.handleClickNovaEquipe()} type="button" class="btn btn-primary">Adicionar Nova Equipe</button>
-    <button onClick={()=>this.handleClickFiltro()} type="button" class="btn btn-primary">Filtrar</button>
+    <div className='container mt-3'>
+    <NovaEquipe show={AddEquipe} cHandler={modalAddEquipeClose} novoHandler2={novoHandler2}/>
+    <div className='d-flex flex-row justify-content-between w-100 mb-3'>
+        <h1>Equipe</h1>
+        <Button className="m-2" onClick={modalAddEquipe}>Nova Equipe</Button>
+      </div>
+    <StyledEngineProvider injectFirst>
+      <Table rows={equipes} />
+    </StyledEngineProvider>
   </div>
-</div>
-
-
 
   )
 };
