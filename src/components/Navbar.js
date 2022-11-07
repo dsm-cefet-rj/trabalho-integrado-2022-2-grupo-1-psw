@@ -10,13 +10,13 @@ function NavbarComponent() {
   return (
     <Navbar bg="light" variant="light" expand="lg">
       <Container>
-      <img
-              src="/icon.png"
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-              alt="React Bootstrap logo"
-            />
+        <img
+          src="/icon.png"
+          width="30"
+          height="30"
+          className="d-inline-block align-top"
+          alt="React Bootstrap logo"
+        />
         <Navbar.Brand href="App">Follower</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -26,11 +26,13 @@ function NavbarComponent() {
             <NavDropdown title="Produtos" id="basic-nav-dropdown">
               <NavDropdown.Item href="Produtos">Todos os Produtos</NavDropdown.Item>
               <NavDropdown.Item href="NovoProduto">Novo Produto</NavDropdown.Item>
-              </NavDropdown>
+            </NavDropdown>
             <Nav.Link href="Cadeias">Cadeias Produtivas</Nav.Link>
             <Nav.Link href="Etapas">Etapas</Nav.Link>
             <Nav.Link href="Equipes">Equipes</Nav.Link>
             <Nav.Link href="Relatorios">Relatórios</Nav.Link>
+          </Nav>
+          <Nav>
             <Nav.Link href="Acesso">Entrar / Registrar-se</Nav.Link>
           </Nav>
         </Navbar.Collapse>
