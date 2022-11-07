@@ -7,7 +7,7 @@ import Acesso from '../pages/Acesso';
 import Cadeias from '../pages/Cadeias';
 import Dashboard from '../pages/Dashboard';
 import Equipes from '../pages/Equipes';
-import NovoProduto from '../pages/NovoProduto';
+import NovoProduto from '../components/produtos/NovoProduto';
 import Produtos from '../pages/Produtos';
 import Relatorios from '../pages/Relatorios';
 import Usuarios from '../pages/Usuarios';
