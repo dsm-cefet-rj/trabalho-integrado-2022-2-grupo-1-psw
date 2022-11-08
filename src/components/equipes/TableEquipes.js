@@ -155,8 +155,8 @@ import { Button } from 'react-bootstrap';
 import Equipes from '../../pages/Equipes';
 
 function Row(props) {
-  function removerEquipe(props) {
-
+  function removerEquipe() {
+    props.removeHandler(props.obj.index)
   }
 
 
@@ -167,13 +167,17 @@ function Row(props) {
       <td>{props.obj.codigo}</td>
       <td>{props.obj.quantidade}</td>
       <td>
-        <Button className="p-1" onClick={"a"}>Remover</Button>
+        <Button className="p-1" onClick={removerEquipe}>Remover</Button>
       </td>
     </tr>
   )
 }
 
 export default function simpleTable(props) {
+ function removerEquipe(equipe){
+  props.removeHandler(equipe);
+ }
+
   return (
     <div className="border rounded bg-light t-size overflow-auto">
       <Table variant='light'>
@@ -188,7 +192,7 @@ export default function simpleTable(props) {
         </thead>
         <tbody>
           {props.rows.map((row, i) => {
-            return (<Row obj={{ ...row, index: i + 1 }} />)
+            return (<Row removeHandler={removerEquipe} obj={{ ...row, index: i + 1 }} />)
           })}
         </tbody>
       </Table>

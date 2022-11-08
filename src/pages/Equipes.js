@@ -23,6 +23,17 @@ function Equipes () {
     setEquipe([...equipes, equipe])
   }
 
+  function removerEquipe(equipe) {
+    let c = window.confirm("Deseja apagar esta equipe?")
+    if(!c){
+      return 
+   }
+
+    let e = [...equipes]
+    e.splice(equipe-1, equipe)
+    setEquipe(e)
+  }
+
 
   return (
     <div className='container mt-3'>
@@ -32,7 +43,7 @@ function Equipes () {
         <Button className="m-2" onClick={modalAddEquipe}>Nova Equipe</Button>
       </div>
     <StyledEngineProvider injectFirst>
-      <Table rows={equipes} />
+      <Table  rows={equipes} removeHandler={removerEquipe} />
     </StyledEngineProvider>
   </div>
 
