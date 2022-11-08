@@ -16,6 +16,23 @@ function Etapas() {
   function novoHandler2(etapa){
     setEtapas([...etapas, etapa])
   }
+  function removeEtapa(etapa) {
+   let c = window.confirm("deseja apagar está etapa?")
+   if(!c){
+
+    return
+   }
+
+
+
+   
+    let e =  [...etapas]
+      e.splice (etapa -1,1)
+      setEtapas (e) 
+
+      }
+
+
   return (
     <div className='container mt-3'>
       <NovaEtapa show={NEtapasModal} cHandler={NovaEtapaModalClose} novoHandler2={novoHandler2}/>
@@ -24,7 +41,7 @@ function Etapas() {
           <Button className="m-2" onClick={NovaEtapaModal}>Nova Etapa</Button>
         </div>
       <StyledEngineProvider injectFirst>
-        <Table rows={etapas} />
+        <Table rows={etapas} removeHandler={removeEtapa}/>
       </StyledEngineProvider>
     </div>
   )

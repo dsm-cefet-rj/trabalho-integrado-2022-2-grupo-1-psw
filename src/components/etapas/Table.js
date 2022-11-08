@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap';
 
 function Row(props) {
   function removerEtapa(){
+  props.removeHandler (props.obj.index)
 
   }
   return (
@@ -13,13 +14,19 @@ function Row(props) {
       <td>{props.obj.duracao}</td>
       
       <td>
-        <Button className="p-1">Remover</Button>
+        <Button onClick={removerEtapa} className="p-1">Remover</Button>
       </td>
     </tr>
   )
 }
 
 export default function simpleTable(props) {
+
+  function removeEtapa(etapa) {
+props.removeHandler (etapa)
+
+  }
+
   return (
     <div className="border rounded bg-light t-size overflow-auto">
       <Table variant='light'>
@@ -34,7 +41,7 @@ export default function simpleTable(props) {
         </thead>
         <tbody>
           {props.rows.map((row, i) => {
-            return (<Row obj={{ ...row, index: i + 1 }} />)
+            return (<Row removeHandler={removeEtapa} obj={{ ...row, index: i + 1 }} />)
           })}
         </tbody>
       </Table>
