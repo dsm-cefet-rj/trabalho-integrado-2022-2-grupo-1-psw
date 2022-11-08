@@ -22,7 +22,7 @@
 // function createData(
 //   nomeEquipe: string,
 //   quantidade: int,
-  
+
 // ) {
 //   return {
 //     name,
@@ -147,3 +147,51 @@
 
 
 // export default EquipesRow
+
+
+import Table from 'react-bootstrap/Table';
+import './modalAddEquipe.css';
+import { Button } from 'react-bootstrap';
+import Equipes from '../../pages/Equipes';
+
+function Row(props) {
+  function removerEquipe(props) {
+
+  }
+
+
+  return (
+    <tr>
+      <td className='ps-4'>{props.obj.index}</td>
+      <td className='w-50'>{props.obj.nome}</td>
+      <td>{props.obj.codigo}</td>
+      <td>{props.obj.quantidade}</td>
+      <td>
+        <Button className="p-1" onClick={"a"}>Remover</Button>
+      </td>
+    </tr>
+  )
+}
+
+export default function simpleTable(props) {
+  return (
+    <div className="border rounded bg-light t-size overflow-auto">
+      <Table variant='light'>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Nome da Equipe</th>
+            <th>Gerente</th>
+            <th>Membros</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.rows.map((row, i) => {
+            return (<Row obj={{ ...row, index: i + 1 }} />)
+          })}
+        </tbody>
+      </Table>
+    </div>
+  );
+}

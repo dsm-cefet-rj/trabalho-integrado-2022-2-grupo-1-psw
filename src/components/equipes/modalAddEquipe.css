@@ -18,3 +18,12 @@
   [data-popup='tooltip'].popup-overlay {
     background: transparent;
   }
+
+
+  .t-size{
+    height: 440px
+  }
+
+ th{
+    position: sticky; top: 0;
+  }

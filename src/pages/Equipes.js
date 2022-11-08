@@ -1,7 +1,7 @@
 import React from "react";
-import EquipesRow from '../components/equipes/TableEquipes.js';
+import Table from '../components/equipes/TableEquipes.js';
 import NovaEquipe from "../components/equipes/modalAddEquipe.js";
-import { Table, Button} from "react-bootstrap"
+import {Button} from "react-bootstrap"
 import {useState} from 'react'
 import {
   ThemeProvider,
@@ -11,17 +11,19 @@ import {
 
 
 function Equipes () {
-  const [AddEquipe, setAddEquipe] = useState(false)
+  const [AddEquipe, setmodalAddEquipe] = useState(false)
   const [equipes, setEquipe] = useState([])
   function modalAddEquipe() {
-    setAddEquipe(true)
+    setmodalAddEquipe(true)
   }
   function modalAddEquipeClose(){
-    setAddEquipe(false)
+    setmodalAddEquipe(false)
   }
   function novoHandler2(equipe){
-    setAddEquipe([...equipes, equipe])
+    setEquipe([...equipes, equipe])
   }
+
+
   return (
     <div className='container mt-3'>
     <NovaEquipe show={AddEquipe} cHandler={modalAddEquipeClose} novoHandler2={novoHandler2}/>

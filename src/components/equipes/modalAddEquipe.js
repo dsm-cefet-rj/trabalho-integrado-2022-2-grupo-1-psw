@@ -1,5 +1,4 @@
 import React from 'react';
-import Popup from 'react';
 import './modalAddEquipe.css';
 import { Modal, Button } from 'react-bootstrap';
 import FormsEquipe from './FormsEquipe';
