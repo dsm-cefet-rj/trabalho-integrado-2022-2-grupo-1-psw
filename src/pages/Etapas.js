@@ -15,6 +15,8 @@ function Etapas() {
   }
   function novoHandler2(etapa){
     setEtapas([...etapas, etapa])
+    setNEtapasModal (false)
+    
   }
   function removeEtapa(etapa) {
    let c = window.confirm("deseja apagar está etapa?")
