@@ -1,7 +1,5 @@
-function Cadeias () {
-  return (
-    <div></div>
-  )
-};
+function Cadeias() {
+  return <div></div>;
+}
 
 export default Cadeias;
