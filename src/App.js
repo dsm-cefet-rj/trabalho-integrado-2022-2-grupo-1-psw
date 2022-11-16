@@ -8,7 +8,7 @@ function App() {
     <RecoilRoot>
     <BrowserRouter>
       <NavbarComponent />
-      <div className="pd-auto">
+      <div className="pd-auto h-100">
         
         <Router />
       </div>
