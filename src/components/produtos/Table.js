@@ -1,11 +1,13 @@
 import Table from 'react-bootstrap/Table';
 import '../../styles/produtos.css';
 import { Button } from 'react-bootstrap';
+import {FaTrashAlt} from 'react-icons/fa'
 
 function Row(props) {
-  function removerProduto(){
-
+  function removerProduto() {
+    props.removeHandler(props.obj.index);
   }
+
   return (
     <tr>
       <td className='ps-4'>{props.obj.index}</td>
@@ -13,13 +15,19 @@ function Row(props) {
       <td>{props.obj.codigo}</td>
       <td>{props.obj.quantidade}</td>
       <td>
-        <Button className="p-1">Remover</Button>
+      <Button onClick={removerProduto} className="p-1">
+          <FaTrashAlt/>
+        </Button>
       </td>
     </tr>
   )
 }
 
 export default function simpleTable(props) {
+  function removeProduto(produto) {
+    props.removeHandler(produto);
+  }
+
   return (
     <div className="border rounded bg-light t-size overflow-auto">
       <Table variant='light'>
@@ -34,7 +42,9 @@ export default function simpleTable(props) {
         </thead>
         <tbody>
           {props.rows.map((row, i) => {
-            return (<Row obj={{ ...row, index: i + 1 }} />)
+            return (
+              <Row removeHandler={removeProduto} obj={{ ...row, index: i + 1 }} />
+            );
           })}
         </tbody>
       </Table>

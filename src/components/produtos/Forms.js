@@ -1,11 +1,12 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {useState} from 'react';
+import { useRecoilState } from 'recoil';
+import {nomeNProduto, codigoNProduto, quantidadeNProduto} from '../../states/produto'
 
 function Forms(props) {
-  const [nome, setNome] = useState()
-  const [codigo, setCodigo] = useState()
-  const [quantidade, setQuantidade] = useState()
+  const [nome, setNome] = useRecoilState(nomeNProduto)
+  const [codigo, setCodigo] = useRecoilState(codigoNProduto)
+  const [quantidade, setQuantidade] = useRecoilState(quantidadeNProduto)
 
   function retornaProduto(){
     let produto = {nome, codigo, quantidade}
@@ -32,7 +33,6 @@ function Forms(props) {
       <Button variant="primary" className='m-2' onClick={retornaProduto}>
         Criar Produto
       </Button>
-
     </Form>
   );
 }

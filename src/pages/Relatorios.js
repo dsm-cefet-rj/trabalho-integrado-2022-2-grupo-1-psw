@@ -1,7 +1,5 @@
-function Relatorios () {
-  return (
-    <div></div>
-  )
-};
+function Relatorios() {
+  return <div></div>;
+}
 
 export default Relatorios;
