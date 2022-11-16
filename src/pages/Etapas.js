@@ -4,9 +4,21 @@ import Table from "../components/etapas/Table.js";
 import { Button } from "react-bootstrap";
 import NovaEtapa from "../components/etapas/NovaEtapa.js";
 import { atom, selector, useRecoilState } from "recoil";
+
+const textState = atom({
+  key: 'qualquercoisa',
+  default: '',
+});
+
 function Etapas() {
   const [NEtapasModal, setNEtapasModal] = useState(false);
   const [etapas, setEtapas] = useState([]);
+  const [text, setText] = useRecoilState(textState);
+  const [text2, setText2] = useRecoilState(textState);
+
+  const onChange = (event) => {
+    setText(event);
+  }
   function NovaEtapaModal() {
     setNEtapasModal(true);
   }
@@ -39,6 +51,12 @@ function Etapas() {
         <h1>Etapa</h1>
         <Button className="m-2" onClick={NovaEtapaModal}>
           Nova Etapa
+        </Button>
+        <Button className="m-2" onClick={()=>onChange('teste')}>
+          Mudar atom
+        </Button>
+        <Button className="m-2" onClick={()=>console.log (text,text2)}>
+          Console
         </Button>
       </div>
       <StyledEngineProvider injectFirst>
