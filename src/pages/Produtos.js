@@ -7,15 +7,19 @@ import NovoProduto from '../components/produtos/NovoProduto.js';
 function Produtos() {
   const [NProdutoModal, setNProdutoModal] = useState(false)
   const [produtos, setProdutos] = useState([])
+  
   function NovoProdutoModal() {
     setNProdutoModal(true)
   }
+  
   function NovoProdutoModalClose(){
     setNProdutoModal(false)
   }
+  
   function novoHandler2(produto){
     setProdutos([...produtos, produto])
   }
+  
   return (
     <div className='container mt-3'>
       <NovoProduto show={NProdutoModal} cHandler={NovoProdutoModalClose} novoHandler2={novoHandler2}/>
@@ -31,8 +35,3 @@ function Produtos() {
 };
 
 export default Produtos;
-
-// [{ nome: 'Blusa Rosa', codigo: 'B1010', quantidade: 4, cadeia: 'Blusa', etapa: 'Corte' },
-// { nome: 'Calça', codigo: 'C5124', quantidade: 4, cadeia: 'Calça', etapa: 'Costura' },
-// { nome: 'Bermuda', codigo: 'BE500', quantidade: 4, cadeia: 'Calça', etapa: 'Molde' },
-// { nome: 'Blusa Azul', codigo: 'B1020', quantidade: 4, cadeia: 'Blusa', etapa: 'Corte' }]

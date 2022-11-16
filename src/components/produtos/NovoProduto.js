@@ -5,6 +5,7 @@ function NovoProduto(props) {
   function novoHandler(produto){
     props.novoHandler2(produto)
   }
+  
   return (
     <Modal show={props.show}>
       <Modal.Header>

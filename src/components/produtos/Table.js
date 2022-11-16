@@ -1,11 +1,21 @@
 import Table from 'react-bootstrap/Table';
 import '../../styles/produtos.css';
 import { Button } from 'react-bootstrap';
+import {FaTrashAlt} from 'react-icons/fa'
+import {useState} from 'react'
 
 function Row(props) {
-  function removerProduto(){
 
-  }
+  //não faço ideia de como remover um produto
+  const removerProduto = () => {
+    props.obj.index((current) =>
+      current.filter(
+        (index) =>
+          props.obj.index === props.obj.index
+      )
+    );
+  };
+
   return (
     <tr>
       <td className='ps-4'>{props.obj.index}</td>
@@ -13,7 +23,9 @@ function Row(props) {
       <td>{props.obj.codigo}</td>
       <td>{props.obj.quantidade}</td>
       <td>
-        <Button className="p-1">Remover</Button>
+        <Button className="p-1" onClick={removerProduto}>
+          <FaTrashAlt/>
+        </Button>
       </td>
     </tr>
   )
