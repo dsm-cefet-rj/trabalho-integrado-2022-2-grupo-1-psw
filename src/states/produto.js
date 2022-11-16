@@ -1,5 +1,4 @@
 import { atom } from "recoil"
-import { selector } from "recoil";
 
   export const nomeNProduto = atom({
     key: 'nomeNProduto',
@@ -15,7 +14,7 @@ import { selector } from "recoil";
   });
   export const listaProduto = atom({
     key: 'listaProduto',
-    default: '',
+    default: [],
   });
   export const modalNProduto = atom({
     key: 'modalNProduto',
