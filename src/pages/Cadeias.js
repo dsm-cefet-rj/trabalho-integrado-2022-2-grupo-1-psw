@@ -30,7 +30,7 @@ function PassoCadeia (props) {
       </div>
       {
         !props.last ?
-        <h3 className="ms-3 fw-bold">>>></h3>:
+        <h3 className="ms-3 fw-bold">{">>>"}</h3>:
         <Button className="ms-3 opacity-75 rounded-circle bg-primary font-weight-bold shadow" style={{width:40, height:40}}>+</Button>
       }
     </div>
