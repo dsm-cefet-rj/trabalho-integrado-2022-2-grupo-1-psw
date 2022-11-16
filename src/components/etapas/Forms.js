@@ -1,10 +1,11 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useState } from "react";
+import { useRecoilState } from 'recoil';
+import {nomeNEtapa, duracaoNEtapa} from '../../states/etapa'
 
 function Forms(props) {
-  const [nome, setNome] = useState();
-  const [duracao, setDuracao] = useState();
+  const [nome, setNome] = useRecoilState(nomeNEtapa);
+  const [duracao, setDuracao] = useRecoilState(duracaoNEtapa);
 
   function retornaEtapa() {
     let etapa = { nome, duracao };

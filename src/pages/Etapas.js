@@ -1,33 +1,23 @@
-import { useState } from "react";
 import { StyledEngineProvider } from "@mui/material/styles";
 import Table from "../components/etapas/Table.js";
 import { Button } from "react-bootstrap";
 import NovaEtapa from "../components/etapas/NovaEtapa.js";
-import { atom, selector, useRecoilState } from "recoil";
-
-const textState = atom({
-  key: 'qualquercoisa',
-  default: '',
-});
+import { useRecoilState } from "recoil";
+import {modalNEtapa, listaEtapa} from '../states/etapa'
 
 function Etapas() {
-  const [NEtapasModal, setNEtapasModal] = useState(false);
-  const [etapas, setEtapas] = useState([]);
-  const [text, setText] = useRecoilState(textState);
-  const [text2, setText2] = useRecoilState(textState);
+  const [modal, setModal] = useRecoilState(modalNEtapa);
+  const [etapas, setEtapas] = useRecoilState(listaEtapa);
 
-  const onChange = (event) => {
-    setText(event);
-  }
   function NovaEtapaModal() {
-    setNEtapasModal(true);
+    setModal(true);
   }
   function NovaEtapaModalClose() {
-    setNEtapasModal(false);
+    setModal(false);
   }
   function novoHandler2(etapa) {
     setEtapas([...etapas, etapa]);
-    setNEtapasModal(false);
+    setModal(false);
   }
   function removeEtapa(etapa) {
     let c = window.confirm("deseja apagar está etapa?");
@@ -43,7 +33,7 @@ function Etapas() {
   return (
     <div className="container mt-3">
       <NovaEtapa
-        show={NEtapasModal}
+        show={modal}
         cHandler={NovaEtapaModalClose}
         novoHandler2={novoHandler2}
       />
@@ -51,12 +41,6 @@ function Etapas() {
         <h1>Etapa</h1>
         <Button className="m-2" onClick={NovaEtapaModal}>
           Nova Etapa
-        </Button>
-        <Button className="m-2" onClick={()=>onChange('teste')}>
-          Mudar atom
-        </Button>
-        <Button className="m-2" onClick={()=>console.log (text,text2)}>
-          Console
         </Button>
       </div>
       <StyledEngineProvider injectFirst>
