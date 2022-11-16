@@ -13,11 +13,8 @@
 // import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 // import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
-
-
 // function EquipesRow (props){
 //     return (
-
 
 // function createData(
 //   nomeEquipe: string,
@@ -144,43 +141,41 @@
 //     )
 // }
 
-
-
 // export default EquipesRow
 
-
-import Table from 'react-bootstrap/Table';
-import './modalAddEquipe.css';
-import { Button } from 'react-bootstrap';
-import Equipes from '../../pages/Equipes';
+import Table from "react-bootstrap/Table";
+import "./modalAddEquipe.css";
+import { Button } from "react-bootstrap";
+import Equipes from "../../pages/Equipes";
 
 function Row(props) {
   function removerEquipe() {
-    props.removeHandler(props.obj.index)
+    props.removeHandler(props.obj.index);
   }
-
 
   return (
     <tr>
-      <td className='ps-4'>{props.obj.index}</td>
-      <td className='w-50'>{props.obj.nome}</td>
+      <td className="ps-4">{props.obj.index}</td>
+      <td className="w-50">{props.obj.nome}</td>
       <td>{props.obj.codigo}</td>
       <td>{props.obj.quantidade}</td>
       <td>
-        <Button className="p-1" onClick={removerEquipe}>Remover</Button>
+        <Button className="p-1" onClick={removerEquipe}>
+          Remover
+        </Button>
       </td>
     </tr>
-  )
+  );
 }
 
 export default function simpleTable(props) {
- function removerEquipe(equipe){
-  props.removeHandler(equipe);
- }
+  function removerEquipe(equipe) {
+    props.removeHandler(equipe);
+  }
 
   return (
     <div className="border rounded bg-light t-size overflow-auto">
-      <Table variant='light'>
+      <Table variant="light">
         <thead>
           <tr>
             <th></th>
@@ -192,7 +187,12 @@ export default function simpleTable(props) {
         </thead>
         <tbody>
           {props.rows.map((row, i) => {
-            return (<Row removeHandler={removerEquipe} obj={{ ...row, index: i + 1 }} />)
+            return (
+              <Row
+                removeHandler={removerEquipe}
+                obj={{ ...row, index: i + 1 }}
+              />
+            );
           })}
         </tbody>
       </Table>

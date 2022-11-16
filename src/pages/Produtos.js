@@ -43,7 +43,7 @@ function Produtos() {
         <Table rows={produtos} removeHandler={removeProduto}/>
       </StyledEngineProvider>
     </div>
-  )
-};
+  );
+}
 
 export default Produtos;

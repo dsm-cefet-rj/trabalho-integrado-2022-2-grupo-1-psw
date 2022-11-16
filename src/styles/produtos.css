@@ -1,7 +1,8 @@
-.t-size{
-    height: 440px
-  }
+.t-size {
+  height: 440px;
+}
 
- th{
-    position: sticky; top: 0;
-  }
+th {
+  position: sticky;
+  top: 0;
+}

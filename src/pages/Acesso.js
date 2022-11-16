@@ -1,7 +1,5 @@
-function Acessos () {
-  return (
-    <div></div>
-  )
-};
+function Acessos() {
+  return <div></div>;
+}
 
 export default Acessos;
