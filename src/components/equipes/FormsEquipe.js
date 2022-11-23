@@ -1,9 +1,10 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useState } from "react";
+import { useRecoilState } from 'recoil';
+import {nomeNEquipe} from '../../states/equipe'
 
 function FormsEquipe(props) {
-  const [nome, setNome] = useState();
+  const [nome, setNome] = useRecoilState(nomeNEquipe)
 
   function retornaEquipe() {
     let equipe = { nome };

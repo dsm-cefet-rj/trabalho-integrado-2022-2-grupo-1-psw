@@ -2,16 +2,15 @@ import React from "react";
 import Table from "../components/equipes/TableEquipes.js";
 import NovaEquipe from "../components/equipes/modalAddEquipe.js";
 import { Button } from "react-bootstrap";
-import { useState } from "react";
-import {
-  ThemeProvider,
-  StyledEngineProvider,
-  CssBaseline,
-} from "@mui/material";
+import { useRecoilState } from 'recoil';
+import { StyledEngineProvider } from '@mui/material/styles';
+import {modalNEquipe, listaEquipe} from '../states/equipe'
+
 
 function Equipes() {
-  const [AddEquipe, setmodalAddEquipe] = useState(false);
-  const [equipes, setEquipe] = useState([]);
+  const [AddEquipe, setmodalAddEquipe] = useRecoilState(modalNEquipe);
+  const [equipes, setEquipe] = useRecoilState(listaEquipe);
+
   function modalAddEquipe() {
     setmodalAddEquipe(true);
   }
@@ -20,6 +19,7 @@ function Equipes() {
   }
   function novoHandler2(equipe) {
     setEquipe([...equipes, equipe]);
+    setmodalAddEquipe(false);
   }
 
   function removerEquipe(equipe) {
