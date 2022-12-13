@@ -1,7 +1,8 @@
 ## Getting Started
 
 - clone this repo
-- open cmd inside the folder and exec `npm install`
+- open cmd inside the folder and exec:
+- `docker compose up`
 
 # Front
 
