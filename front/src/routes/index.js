@@ -9,12 +9,17 @@ import Produtos from "../pages/Produtos";
 import Relatorios from "../pages/Relatorios";
 import Usuarios from "../pages/Usuarios";
 import Etapas from "../pages/Etapas";
+import { ReactFlowProvider } from "reactflow";
 
 function Router() {
   return (
     <Routes>
       <Route path="/acesso" element={<Acesso />} />
-      <Route path="/cadeias" element={<Cadeias />} />
+      <Route path="/cadeias" element={
+        <ReactFlowProvider>
+          <Cadeias />
+        </ReactFlowProvider>
+      } />
       <Route path="/" element={<Dashboard />} />
       <Route path="/equipes" element={<Equipes />} />
       <Route path="/novoProduto" element={<NovoProduto />} />

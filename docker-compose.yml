@@ -1,0 +1,36 @@
+version: "3.9"
+services:
+
+  mongodb:
+    image: bitnami/mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_psw:/bitnami/mongodb
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MONGODB_USERNAME=root
+      - MONGODB_PASSWORD=admin
+      - MONGODB_DATABASE=psw_db
+
+  back:
+    build:
+      context: ./back
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./back:/home/app
+
+  front:
+    build: 
+      context: ./front
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./front:/home/app
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=1000
+
+volumes:
+  mongodb_psw:

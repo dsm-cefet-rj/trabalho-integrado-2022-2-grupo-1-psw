@@ -3,7 +3,7 @@
 - clone this repo
 - open cmd inside the folder and exec `npm install`
 
-## Available Scripts
+# Front
 
 In the project directory, you can run:
 
