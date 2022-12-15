@@ -1,6 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-
-import Acesso from "../pages/Acesso";
 import Cadeias from "../pages/Cadeias";
 import Dashboard from "../pages/Dashboard";
 import Equipes from "../pages/Equipes";
@@ -9,12 +7,23 @@ import Produtos from "../pages/Produtos";
 import Relatorios from "../pages/Relatorios";
 import Usuarios from "../pages/Usuarios";
 import Etapas from "../pages/Etapas";
+import Signin from "../pages/Signin";
+import Signup from "../pages/Signup";
 import { ReactFlowProvider } from "reactflow";
+import useAuth from "../hooks/useAuth";
+import { Fragment } from "react";
+
+const Private = ({ Item }) => {
+  const { signed } = useAuth();
+
+  return signed > 0 ? <Item /> : <Signin />;
+};
 
 function Router() {
   return (
     <Routes>
-      <Route path="/acesso" element={<Acesso />} />
+      <Route path="/" element={<Signin />} />
+      <Route exact path="/signup" element={<Signup />} />
       <Route path="/cadeias" element={
         <ReactFlowProvider>
           <Cadeias />

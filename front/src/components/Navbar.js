@@ -23,7 +23,7 @@ function NavbarComponent() {
             <Nav.Link href="Relatorios">Relatórios</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="Acesso">Entrar / Registrar-se</Nav.Link>
+            <Nav.Link href="/">Entrar / Registrar-se</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
