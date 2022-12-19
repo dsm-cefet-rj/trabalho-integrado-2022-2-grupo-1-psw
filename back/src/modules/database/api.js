@@ -1,19 +1,15 @@
 const mongoose = require('mongoose');
 
-const conn = connect();
+module.exports = async () => {
 
-function connect() {
-  // uri pattern: 'mongodb://user:password@localhost:27017/test');` if your database has auth enabled
+  const uri = !!process.env.DB_URI ? process.env.DB_URI :
+  `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
 
   try{
-    mongoose.createConnection(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`);
-
+    await mongoose.connect(uri);
     console.log('Database: Connect to successfully!');
-    return mongoose.connection;
 
   }catch(e){
     console.log('Error: Could not connect to database!', e.message);
   }
 }
-
-module.exports = conn;

@@ -5,15 +5,13 @@ const router = Router();
 //controller imports
 const {
   GetController,
-  CreateController,
-  UpdateController,
-  DeleteController
+  RegisterController,
+  LoginController
 } = require('./controller');
 
 //controller implementations
-router.get('/get/:id', GetController);
-router.post('/new', CreateController);
-router.put('/update', UpdateController);
-router.delete('/delete/:id', DeleteController);
+router.get('/get/:email?', GetController);
+router.post('/register', RegisterController);
+router.post('/login', LoginController);
 
 module.exports = router;

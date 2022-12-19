@@ -3,35 +3,26 @@ const {
   response
 } = require('express');
 
-function GetController(req = request, res = response) {
-  res.status(200).send({
-    route:'users/get',
-    id:req.params.id
-  });
+const { Login } = require('./service');
+
+async function GetController (req = request, res = response) {
+  Login();
 }
 
-function CreateController(req = request, res = response) {
+async function LoginController (req = request, res = response) {
   res.status(201).send({
     route:'users/create'
   });
 }
 
-function UpdateController(req = request, res = response) {
+async function RegisterController (req = request, res = response) {
   res.status(200).send({
     route:'users/update'
   });
 }
 
-function DeleteController(req = request, res = response) {
-  res.status(200).send({
-    route:'users/delete',
-    id:req.params.id
-  });
-}
-
 module.exports = {
   GetController,
-  CreateController,
-  UpdateController,
-  DeleteController
+  RegisterController,
+  LoginController
 }
