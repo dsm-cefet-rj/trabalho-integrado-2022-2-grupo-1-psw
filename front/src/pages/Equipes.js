@@ -5,6 +5,7 @@ import { Button } from "react-bootstrap";
 import { useRecoilState } from 'recoil';
 import { StyledEngineProvider } from '@mui/material/styles';
 import {modalNEquipe, listaEquipe} from '../states/equipe'
+import NavbarComponent from "../components/Navbar";
 
 
 function Equipes() {
@@ -34,6 +35,8 @@ function Equipes() {
   }
 
   return (
+    <div>
+      <NavbarComponent />
     <div className="container mt-3">
       <NovaEquipe
         show={AddEquipe}
@@ -49,6 +52,7 @@ function Equipes() {
       <StyledEngineProvider injectFirst>
         <Table rows={equipes} removeHandler={removerEquipe} />
       </StyledEngineProvider>
+    </div>
     </div>
   );
 }

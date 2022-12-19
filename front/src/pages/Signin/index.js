@@ -26,12 +26,12 @@ const Signin = () => {
       return;
     }
 
-    navigate("/home");
+    navigate("/Dashboard");
   };
 
   return (
     <C.Container>
-      <C.Label>Sistema de Login</C.Label>
+      <C.Label>Login</C.Label>
       <C.Content>
         <Input
           type="email"

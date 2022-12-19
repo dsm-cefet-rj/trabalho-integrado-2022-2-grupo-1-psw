@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 import NovoProduto from '../components/produtos/NovoProduto.js';
 import {modalNProduto, listaProduto} from '../states/produto'
 import popup from '../components/popup'
+import NavbarComponent from "../components/Navbar";
 
 function Produtos() {
   const [modal, setModal] = useRecoilState(modalNProduto)
@@ -34,7 +35,9 @@ function Produtos() {
        }
   
   return (
-    <div className='container mt-3'>
+    <div>
+      <NavbarComponent />
+      <div className='container mt-3'>
       <NovoProduto show={modal} cHandler={NovoProdutoModalClose} novoHandler2={novoHandler2}/>
       <div className='d-flex flex-row justify-content-between w-100 mb-3'>
           <h1>Produto</h1>
@@ -43,6 +46,7 @@ function Produtos() {
       <StyledEngineProvider injectFirst>
         <Table rows={produtos} removeHandler={removeProduto}/>
       </StyledEngineProvider>
+    </div>
     </div>
   );
 }

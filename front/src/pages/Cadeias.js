@@ -4,6 +4,7 @@ import { stepsAtom, cadeiaAtom, nodesAtom, edgesAtom } from '../states/cadeia';
 import ReactFlow, { Background, Controls, applyEdgeChanges, applyNodeChanges, addEdge, useOnViewportChange } from 'reactflow';
 import CadeiaEtapa from "../components/cadeia/etapa";
 import ButtonEdge from "../components/cadeia/buttonEdge";
+import NavbarComponent from "../components/Navbar";
 
 import 'reactflow/dist/style.css';
 
@@ -102,6 +103,8 @@ function Cadeias() {
   }
 
   return (
+    <div>
+    <NavbarComponent />
     <div className="container mt-3 h-75">
       <div id="flow" className="border rounded h-75 w-100 shadow mt-4 align-items-center d-flex p-1 overflow-auto">
         <ReactFlow
@@ -124,6 +127,7 @@ function Cadeias() {
         }
         </div>
       </div>
+    </div>
     </div>
   );
 }

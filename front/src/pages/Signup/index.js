@@ -43,7 +43,7 @@ const Signup = () => {
 
   return (
     <C.Container>
-      <C.Label>Sistema de Login</C.Label>
+      <C.Label>Cadastro</C.Label>
       <C.Content>
         <Input
           type="email"
@@ -70,7 +70,7 @@ const Signup = () => {
         <C.LabelSignin>
           Já tem uma conta?
           <C.Strong>
-            <Link to="/">&nbsp;Entre</Link>
+            <Link to="/Dashboard">&nbsp;Entre</Link>
           </C.Strong>
         </C.LabelSignin>
       </C.Content>

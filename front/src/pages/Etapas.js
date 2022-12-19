@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import NovaEtapa from "../components/etapas/NovaEtapa.js";
 import { useRecoilState } from "recoil";
 import {modalNEtapa, listaEtapa} from '../states/etapa'
+import NavbarComponent from "../components/Navbar";
 
 function Etapas() {
   const [modal, setModal] = useRecoilState(modalNEtapa);
@@ -31,6 +32,8 @@ function Etapas() {
   }
 
   return (
+    <div>
+    <NavbarComponent />
     <div className="container mt-3">
       <NovaEtapa
         show={modal}
@@ -46,6 +49,7 @@ function Etapas() {
       <StyledEngineProvider injectFirst>
         <Table rows={etapas} removeHandler={removeEtapa} />
       </StyledEngineProvider>
+    </div>
     </div>
   );
 }

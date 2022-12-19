@@ -10,7 +10,6 @@ function App() {
     <RecoilRoot>
     <AuthProvider>
     <BrowserRouter>
-      <NavbarComponent />
       <div className="pd-auto h-100">
         <Router />
         <div className="fixed-bottom"><Footer /></div>
