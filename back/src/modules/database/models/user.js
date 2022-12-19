@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
     type : String,
     required : true
   },
+  equipes: Array,
   hash: String,
   salt: String
 });

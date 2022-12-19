@@ -1,11 +1,26 @@
 const UserModel = require('../database/models/user');
 
+async function GetService (email) {
+  try{
+    const user = await UserModel.findOne({email});
+    return {
+      data:{
+        username:user.user,
+        email:user.email,
+        equipes: user.equipes
+      }
+    }
+  }catch(e){
+    return {error:e}
+  }
+}
+
 async function LoginService (email, pass) {
   let error;
 
   try{
     const user = await UserModel.findOne({email});
-    
+
     if(!!user){
       valid = user.validPassword(pass);
 
@@ -41,5 +56,6 @@ async function RegisterService(username, email, pass) {
 
 module.exports = {
   LoginService,
-  RegisterService
+  RegisterService,
+  GetService
 }
