@@ -13,8 +13,8 @@ function App() {
       <NavbarComponent />
       <div className="pd-auto h-100">
         <Router />
+        <div className="fixed-bottom"><Footer /></div>
       </div>
-      <Footer />
     </BrowserRouter>
     </AuthProvider>
 

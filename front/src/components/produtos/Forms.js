@@ -17,12 +17,12 @@ function Forms(props) {
     <Form>
       <Form.Group className="mb-3" controlId="formNome">
         <Form.Label>Nome</Form.Label>
-        <Form.Control value={nome} onChange={(e) => setNome(e.target.value)} type="string" placeholder="Digite o nome do produto" />
+        <Form.Control value={nome} onChange={(e) => setNome(e.target.value)} maxLength={30} type="string" placeholder="Digite o nome do produto" />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formCodigo">
         <Form.Label>Código</Form.Label>
-        <Form.Control value={codigo} onChange={(e) => setCodigo(e.target.value)} type="string" placeholder="Digite o código do produto" />
+        <Form.Control value={codigo} onChange={(e) => setCodigo(e.target.value)} maxLength={10} type="string" placeholder="Digite o código do produto" />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formQuantidade">
