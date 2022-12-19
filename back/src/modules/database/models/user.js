@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const crypto = require('crypto');
 
 const userSchema = new mongoose.Schema({
   user:{
@@ -9,6 +10,7 @@ const userSchema = new mongoose.Schema({
     type : String,
     required : true
   },
+  equipes: Array,
   hash: String,
   salt: String
 });
