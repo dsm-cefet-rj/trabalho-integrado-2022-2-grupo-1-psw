@@ -1,4 +1,7 @@
 require('dotenv').config();
+require('module-alias/register');
+
+require('@models/../api')
 
 const http = require('http');
 

@@ -21,16 +21,5 @@ services:
     volumes:
       - ./back:/home/app
 
-  front:
-    build: 
-      context: ./front
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./front:/home/app
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-      - CHOKIDAR_INTERVAL=1000
-
 volumes:
   mongodb_psw:
