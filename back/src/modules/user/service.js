@@ -1,14 +1,45 @@
 const UserModel = require('../database/models/user');
 
-async function Login(email, password) {
-  const user = await UserModel.findOne({email});
-  if(!!user){
+async function LoginService (email, pass) {
+  let error;
+
+  try{
+    const user = await UserModel.findOne({email});
     
-  }else{
-    return false;
+    if(!!user){
+      valid = user.validPassword(pass);
+
+      if(valid){
+        return { data:true };
+      }else{
+        error = new Error("Invalid password!");
+      }
+
+    }else{
+      error = new Error("User not found!");
+    }
+  }catch(e){
+    error = e;
   }
+
+  return {error};
+  
+}
+
+async function RegisterService(username, email, pass) {
+
+  try{
+    const user = await UserModel.create({user:username, email});
+    await user.setPassword(pass);
+    await user.save();
+    return { data:true };
+  }catch(e){
+    return { error:e };
+  }
+
 }
 
 module.exports = {
-  Login
+  LoginService,
+  RegisterService
 }
