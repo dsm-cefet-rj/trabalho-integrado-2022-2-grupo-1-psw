@@ -103,7 +103,6 @@ function Cadeias() {
 
   return (
     <div className="container mt-3 h-75">
-      <h6>Lambedor</h6>
       <div id="flow" className="border rounded h-75 w-100 shadow mt-4 align-items-center d-flex p-1 overflow-auto">
         <ReactFlow
         nodes={nodes}

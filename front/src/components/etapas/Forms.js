@@ -21,6 +21,7 @@ function Forms(props) {
           onChange={(e) => setNome(e.target.value)}
           type="string"
           placeholder="Digite o nome da etapa"
+          maxLength={30}
         />
       </Form.Group>
 

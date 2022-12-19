@@ -4,6 +4,7 @@ import Table from '../components/produtos/Table.js'
 import { Button } from 'react-bootstrap';
 import NovoProduto from '../components/produtos/NovoProduto.js';
 import {modalNProduto, listaProduto} from '../states/produto'
+import popup from '../components/popup'
 
 function Produtos() {
   const [modal, setModal] = useRecoilState(modalNProduto)
@@ -23,7 +24,7 @@ function Produtos() {
   }
 
   function removeProduto(produto) {
-    let c = window.confirm("deseja apagar este produto?")
+    let c = window.confirm("deseja apagar está etapa?");
     if(!c){
      return
     }
