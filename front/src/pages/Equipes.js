@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Table from "../components/equipes/TableEquipes.js";
 import NovaEquipe from "../components/equipes/modalAddEquipe.js";
 import { Button } from "react-bootstrap";
@@ -8,7 +8,6 @@ import {modalNEquipe, listaEquipe} from '../states/equipe'
 import NavbarComponent from "../components/Navbar";
 import {modalGEquipe} from "../states/equipe.js"
 import GerenciarEquipe from "../components/equipes/modalGerenciarMembros.js";
-
 
 function Equipes() {
   const [GEquipe, setmodalGEquipe] = useRecoilState(modalGEquipe);
@@ -29,6 +28,10 @@ function Equipes() {
     e.splice(equipe - 1, equipe);
     setEquipe(e);
   }
+
+  useEffect(()=> {
+    localStorage.setItem('listaEquipe', JSON.stringify(equipes))
+  }, [equipes])
 
 
   return (

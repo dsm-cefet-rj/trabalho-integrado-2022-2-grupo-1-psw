@@ -1,5 +1,5 @@
 import { atom } from "recoil"
-
+const str = localStorage.getItem('listaEquipe') ? localStorage.getItem('listaEquipe') : '[]'
   export const nomeNEquipe = atom({
     key: 'nomeNEquipe',
     default: '',
@@ -10,7 +10,7 @@ import { atom } from "recoil"
   });
   export const listaEquipe = atom({
     key: 'listaEquipe',
-    default: [],
+    default: JSON.parse(str),
   });
   export const modalNEquipe = atom({
     key: 'modalNEquipe',

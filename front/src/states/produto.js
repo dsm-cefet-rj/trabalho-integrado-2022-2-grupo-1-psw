@@ -1,5 +1,5 @@
 import { atom } from "recoil"
-
+const str = localStorage.getItem('listaProduto') ? localStorage.getItem('listaProduto') : '[]'
   export const nomeNProduto = atom({
     key: 'nomeNProduto',
     default: '',
@@ -14,7 +14,7 @@ import { atom } from "recoil"
   });
   export const listaProduto = atom({
     key: 'listaProduto',
-    default: [],
+    default: JSON.parse(str),
   });
   export const modalNProduto = atom({
     key: 'modalNProduto',

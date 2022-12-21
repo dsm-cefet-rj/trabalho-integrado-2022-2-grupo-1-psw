@@ -1,5 +1,5 @@
 import { atom } from "recoil"
-
+const srt = localStorage.getItem('listaEtapa') ? localStorage.getItem('listaEtapa') : '[]'
   export const nomeNEtapa = atom({
     key: 'nomeNEtapa',
     default: '',
@@ -10,7 +10,7 @@ import { atom } from "recoil"
   });
   export const listaEtapa = atom({
     key: 'listaEtapa',
-    default: [{ordem: 1, nome: "mta fe"}, {ordem: 2, nome: "uaaau"}],
+    default: JSON.parse(srt),
   });
   export const modalNEtapa = atom({
     key: 'modalNEtapa',

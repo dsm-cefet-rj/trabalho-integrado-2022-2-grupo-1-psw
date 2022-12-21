@@ -5,6 +5,7 @@ import NovaEtapa from "../components/etapas/NovaEtapa.js";
 import { useRecoilState } from "recoil";
 import {modalNEtapa, listaEtapa} from '../states/etapa'
 import NavbarComponent from "../components/Navbar";
+import { useEffect } from "react";
 
 function Etapas() {
   const [modal, setModal] = useRecoilState(modalNEtapa);
@@ -13,7 +14,10 @@ function Etapas() {
   function NovaEtapaModal() {
     setModal(true);
   }
- 
+  
+  useEffect(()=> {
+    localStorage.setItem('listaEtapa', JSON.stringify(etapas))
+  }, [etapas])
 
   return (
     <div>
