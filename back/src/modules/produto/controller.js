@@ -1,13 +1,13 @@
-/*const {
+const {
   request,
   response
 } = require('express');
 
-const { LoginService, RegisterService, GetService } = require('./service');
+const {RegisterService, GetService } = require('./service');
 
 async function GetController (req = request, res = response) {
-  const email = req.params.email;
-  if(!email){
+  const nome = req.params.nome;
+  if(!nome){
     res.send({
       status:false,
       message: "Undefined obrigatory parameter!"
@@ -15,7 +15,7 @@ async function GetController (req = request, res = response) {
     return;
   }
 
-  const {error, data} = await GetService(email);
+  const {error, data} = await GetService(nome);
 
   if(error){
     res.send({
@@ -32,35 +32,8 @@ async function GetController (req = request, res = response) {
 
 }
 
-async function LoginController (req = request, res = response) {
-
-  if(!req.body.email || !req.body.pass){
-    res.send({
-      status:false,
-      message: "Undefined obrigatory fields!"
-    });
-    return;
-  }
-
-  const {error} = await LoginService(req.body.email, req.body.pass);
-
-  if(error){
-    res.send({
-      status:false,
-      message: error.message
-    });
-    return;
-  }
-
-  res.send({
-    status:true,
-    message: "Login successful!"
-  });
-
-}
-
 async function RegisterController (req = request, res = response) {
-  if(!req.body.username || !req.body.email || !req.body.pass){
+  if(!req.body.nome || !req.body.codigo || !req.body.quantidade){
     res.send({
       status:false,
       message: "Undefined obrigatory fields!"
@@ -68,7 +41,7 @@ async function RegisterController (req = request, res = response) {
     return;
   }
 
-  const {error} = await RegisterService(req.body.username, req.body.email, req.body.pass);
+  const {error} = await RegisterService(req.body.nome, req.body.codigo, req.body.quantidade);
 
   if(error){
     res.send({
@@ -87,7 +60,5 @@ async function RegisterController (req = request, res = response) {
 
 module.exports = {
   GetController,
-  RegisterController,
-  LoginController
+  RegisterController
 }
-*/

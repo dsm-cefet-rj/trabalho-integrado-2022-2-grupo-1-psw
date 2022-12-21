@@ -1,61 +1,78 @@
-const UserModel = require('../database/models/user');
+const ProdutoModel = require('../database/models/produtos');
 
-async function GetService (email) {
-  try{
-    const user = await UserModel.findOne({email});
-    return {
-      data:{
-        username:user.user,
-        email:user.email,
-        equipes: user.equipes
-      }
-    }
-  }catch(e){
-    return {error:e}
-  }
-}
+const getProdutos = async (req, res) => {
+  try {
+      const produtos = await produtoRepository.getAllProducts();
 
-async function LoginService (email, pass) {
-  let error;
-
-  try{
-    const user = await UserModel.findOne({email});
-
-    if(!!user){
-      valid = user.validPassword(pass);
-
-      if(valid){
-        return { data:true };
-      }else{
-        error = new Error("Invalid password!");
+      if (produtos.length === 0) {
+          return res.status(400).send({ message: "Não há produtos cadastrados." })
       }
 
-    }else{
-      error = new Error("User not found!");
-    }
-  }catch(e){
-    error = e;
+      return res.status(200).send(produtos);
+  } catch (err) {
+      console.log(err.message)
+      return res.status(400).send({ message: "Não foi possível retornar todos os produtos." });
   }
-
-  return {error};
-  
 }
 
-async function RegisterService(username, email, pass) {
+const addProduto = async (req, res) => {
+  const produto = await produtoRepository.addProduto(req.body)
+  try {
+    produto.save(function (err) {
+          if (err) {
+              console.log(err)
+              return res.status(400).send({ message: "Não foi possível cadastrar o produto." });
+          }
+          else {
+              return res.status(200).send({ message: "Produto cadastrado com sucesso!" });
+          }
+      })
 
-  try{
-    const user = await UserModel.create({user:username, email});
-    await user.setPassword(pass);
-    await user.save();
-    return { data:true };
-  }catch(e){
-    return { error:e };
+  } catch (err) {
+      console.log(err.message)
+      return res.status(400).send({ message: "Falha ao tentar adicionar produto." });
+  }
+}
+
+const findProdutoById = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+      const product = await productRepository.findProductById(id);
+
+      if (product) {
+          return res.status(200).send(product);
+      }
+
+      return res.status(400).send({ message: "Nenhum produto com esse id foi encontrado." });
+  } catch (err) {
+      console.log(err.message)
+      return res.status(400).send({ message: "Não foi possível realizar a busca." });
   }
 
 }
+
+const removeProdutoById = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+      const produtoRemoved = await produtoRepository.removeProdutoById(id);
+
+      if (produtoRemoved) {
+          return res.status(200).send({ message: "Produto removido com sucesso!" });
+      }
+
+      return res.status(400).send({ message: "Falha ao tentar remover o produto." });
+  } catch (err) {
+      console.log(err.message)
+      return res.status(400).send({ message: "Não foi possível realizar a busca." });
+  }
+}
+
 
 module.exports = {
-  LoginService,
-  RegisterService,
-  GetService
+  getProdutos,
+  addProduto,
+  findProdutoById,
+  removeProdutoById
 }
