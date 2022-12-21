@@ -147,7 +147,7 @@ import Table from "react-bootstrap/Table";
 import "./modalAddEquipe.css";
 import { Button } from "react-bootstrap";
 import Equipes from "../../pages/Equipes";
-
+import {gerenciarMembros} from "./modalGerenciarMembros.js"
 function Row(props) {
   function removerEquipe() {
     props.removeHandler(props.obj.index);
@@ -166,8 +166,8 @@ function Row(props) {
       <td>{props.obj.qtdMembros}</td>
     
       <td>
-      <Button className="p-1" onClick={adicionarMembro}>
-          Adicionar membro
+      <Button className="me-3" onClick={gerenciarMembros}>
+        Gerenciar
         </Button>
         <Button className="p-1" onClick={removerEquipe}>
           Remover

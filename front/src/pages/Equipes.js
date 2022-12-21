@@ -11,6 +11,7 @@ import NavbarComponent from "../components/Navbar";
 function Equipes() {
   const [AddEquipe, setmodalAddEquipe] = useRecoilState(modalNEquipe);
   const [equipes, setEquipe] = useRecoilState(listaEquipe);
+  
 
   function modalAddEquipe() {
     setmodalAddEquipe(true);
