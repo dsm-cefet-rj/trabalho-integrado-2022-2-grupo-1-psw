@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const EtapaSchema = new mongoose.Schema({
-  ordem: {
+  codigo: {
     type : Number,
     required : true
   },
@@ -10,10 +10,10 @@ const EtapaSchema = new mongoose.Schema({
     required : true
   },
   duracao: {
-    type : String,
+    type : Number,
     required : true
   },
-  equipe:{
+  dono:{
     type : String,
     required : true
   }

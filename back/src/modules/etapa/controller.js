@@ -3,11 +3,19 @@ const {
   response
 } = require('express');
 
-const { LoginService, RegisterService, GetService } = require('./service');
+const {
+  RemoveService,
+  GetService,
+  NewService
+} = require('./service');
 
 async function GetController (req = request, res = response) {
-  const email = req.params.email;
-  if(!email){
+  const dono = req.body.dono;
+  const nome = req.body.nome;
+  const ordem = req.body.ordem;
+  const duracao = req.body.duracao;
+
+  if(!dono){
     res.send({
       status:false,
       message: "Parâmetro obrigatório não definido!"
@@ -15,7 +23,7 @@ async function GetController (req = request, res = response) {
     return;
   }
 
-  const {error, data} = await GetService(email);
+  const {error, data} = await GetService(dono);
 
   if(error){
     res.send({
@@ -32,9 +40,13 @@ async function GetController (req = request, res = response) {
 
 }
 
-async function LoginController (req = request, res = response) {
+async function NewController (req = request, res = response) {
+  const dono = req.body.dono;
+  const nome = req.body.nome;
+  const ordem = req.body.ordem;
+  const duracao = req.body.duracao;
 
-  if(!req.body.email || !req.body.pass){
+  if(!dono || !nome || !ordem || !duracao){
     res.send({
       status:false,
       message: "Campos obrigatórios não preenchidos!"
@@ -42,7 +54,7 @@ async function LoginController (req = request, res = response) {
     return;
   }
 
-  const {error} = await LoginService(req.body.email, req.body.pass);
+  const {error} = await NewService(dono, nome, ordem, duracao);
 
   if(error){
     res.send({
@@ -54,12 +66,12 @@ async function LoginController (req = request, res = response) {
 
   res.send({
     status:true,
-    message: "Login bem-sucedido!"
+    message: "Etapa cadastrada!"
   });
 
 }
 
-async function RegisterController (req = request, res = response) {
+async function RemoveController (req = request, res = response) {
   if(!req.body.username || !req.body.email || !req.body.pass){
     res.send({
       status:false,
@@ -68,7 +80,7 @@ async function RegisterController (req = request, res = response) {
     return;
   }
 
-  const {error} = await RegisterService(req.body.username, req.body.email, req.body.pass);
+  const {error} = await RemoveService(req.body.username, req.body.email, req.body.pass);
 
   if(error){
     res.send({
@@ -87,6 +99,6 @@ async function RegisterController (req = request, res = response) {
 
 module.exports = {
   GetController,
-  RegisterController,
-  LoginController
+  NewController,
+  RemoveController
 }
