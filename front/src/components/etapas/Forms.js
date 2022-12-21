@@ -2,18 +2,19 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useRecoilState } from 'recoil';
 import React, { useState } from 'react';
-import {nomeNEtapa, duracaoNEtapa} from '../../states/etapa'
+import {nomeNEtapa, duracaoNEtapa,modalNEtapa, listaEtapa} from '../../states/etapa'
 
-function Forms(props) {
+function FormsEtapa(props) {
   const [nome, setNome] = useRecoilState(nomeNEtapa);
   const [duracao, setDuracao] = useRecoilState(duracaoNEtapa);
-
+  const [AddEtapa, setmodalAddEtapa] = useRecoilState(modalNEtapa);
   const [validated, setValidated] = useState(false);
-
-  function retornaEtapa() {
+  const [etapas, setEtapa] = useRecoilState(listaEtapa);
+  /*function retornaEtapa() {
     let etapa = { nome, duracao };
     props.novoHandler(etapa);
-  }
+  } */
+
 const handleSubmit = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -23,8 +24,11 @@ const handleSubmit = (event) => {
     setValidated(true);
     if (form.checkValidity() === true){
       event.preventDefault();
-      retornaEtapa();
+      setEtapa([...etapas, {nome}]);
+      setNome('');
+      setmodalAddEtapa(false);
     }
+    
   }
   return (
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
@@ -64,4 +68,4 @@ const handleSubmit = (event) => {
   );
 }
 
-export default Forms;
+export default FormsEtapa;
