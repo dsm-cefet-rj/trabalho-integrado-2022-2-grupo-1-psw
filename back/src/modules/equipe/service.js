@@ -112,7 +112,7 @@ async function RemoveMemberService (equipe, email) {
       throw new Error("Usuário não é membro dessa equipe!");
     }
 
-    await equipeInstance.remove(email);
+    await equipeInstance.removeMember(email);
     await user.removeEquipe(equipe);
 
     await equipeInstance.save();
@@ -127,27 +127,26 @@ async function RemoveMemberService (equipe, email) {
 
 async function AddProdutoService (equipe, codigo) {
   try{
-    const user = await UserModel.findOne({ codigo });
     const equipeInstance = await EquipeModel.findOne({ nome: equipe });
-
-    if(!user){
-      throw new Error("Usuário não encontrado!");
-    }
 
     if(!equipeInstance){
       throw new Error("Equipe não encontrada!");
     }
 
-    if(user.equipes.indexOf(equipeInstance.nome) !== -1){
-      throw new Error("Usuário já é membro dessa equipe!");
+    const produto = await ProdutoModel.findOne({ codigo, dono:equipeInstance.dono });
+
+    if(!produto){
+      throw new Error("Produto não encontrado!");
     }
 
+    if(produto.equipes.indexOf(equipeInstance.nome) !== -1){
+      throw new Error("Esse produto já é compartilhado com essa equipe!");
+    }
 
+    await equipeInstance.addProduto(codigo);
+    await produto.addEquipe(equipe);
 
-    await equipeInstance.addMember(email);
-    await user.addEquipe(equipe);
-
-    await user.save();
+    await produto.save();
     await equipeInstance.save();
     
     return {data:true}
@@ -159,25 +158,26 @@ async function AddProdutoService (equipe, codigo) {
 
 async function RemoveProdutoService (equipe, codigo) {
   try{
-    const produto = await UserModel.findOne({ codigo });
     const equipeInstance = await EquipeModel.findOne({ nome: equipe });
-
-    if(!user){
-      throw new Error("Usuário não encontrado!");
-    }
 
     if(!equipeInstance){
       throw new Error("Equipe não encontrada!");
     }
 
-    if(user.equipes.indexOf(equipeInstance.nome) !== -1){
-      throw new Error("Usuário já é membro dessa equipe!");
+    const produto = await ProdutoModel.findOne({ codigo, dono:equipeInstance.dono });
+
+    if(!produto){
+      throw new Error("Produto não encontrado!");
     }
 
-    await equipeInstance.addMember(email);
-    await user.addEquipe(equipe);
+    if(produto.equipes.indexOf(equipeInstance.nome) === -1){
+      throw new Error("Esse não é compartilhado com essa equipe!");
+    }
 
-    await user.save();
+    await equipeInstance.removeProduto(codigo);
+    await produto.removeEquipe(equipe);
+
+    await produto.save();
     await equipeInstance.save();
     
     return {data:true}

@@ -13,13 +13,6 @@ function Etapas() {
   function NovaEtapaModal() {
     setModal(true);
   }
-  function NovaEtapaModalClose() {
-    setModal(false);
-  }
-  function novoHandler2(etapa) {
-    setEtapas([...etapas, etapa]);
-    setModal(false);
-  }
  
 
   return (
@@ -28,8 +21,6 @@ function Etapas() {
     <div className="container mt-3">
       <NovaEtapa
         show={modal}
-        cHandler={NovaEtapaModalClose}
-        novoHandler2={novoHandler2}
       />
       <div className="d-flex flex-row justify-content-between w-100 mb-3">
         <h1>Etapa</h1>

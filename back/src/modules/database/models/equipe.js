@@ -37,6 +37,6 @@ EquipeSchema.methods.removeProduto = function(codigo) {
   }
 };
 
-const Equipe = mongoose.model('Equipe', EquipeSchema);
+const EquipeModel = mongoose.model('Equipe', EquipeSchema);
 
-module.exports = Equipe;
+module.exports = EquipeModel;

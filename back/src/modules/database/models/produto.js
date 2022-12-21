@@ -1,6 +1,6 @@
-const moongose = require('mongoose');
+const mongoose = require('mongoose');
 
-const ProdutoModel = moongose.model('Produtos', {
+const produtoSchema = new mongoose.Schema({
   nome: {
     type: String,
     required: true
@@ -19,16 +19,22 @@ const ProdutoModel = moongose.model('Produtos', {
   data_entrada: Date
 });
 
-ProdutoSchema.methods.addEquipe = function(nome) {
+produtoSchema.methods.addEquipe = function(nome) {
   if(this.equipe.indexOf(nome) === -1){
     this.equipe.push(nome);
   }
 };
 
-ProdutoSchema.methods.removeEquipe = function(nome) {
+produtoSchema.methods.removeEquipe = function(nome) {
   if(this.equipe.indexOf(nome) !== -1){
     this.equipe.splice(this.equipe.indexOf(nome), 1);
   }
 };
 
+produtoSchema.methods.editaEtapa = function(etapa) {
+  this.etapa = etapa;
+  this.data_entrada = new Date();
+};
+
+const ProdutoModel = mongoose.model('Produtos', produtoSchema);
 module.exports = ProdutoModel;

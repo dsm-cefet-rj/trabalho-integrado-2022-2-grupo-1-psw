@@ -8,7 +8,9 @@ const {
   CreateController,
   DeleteController,
   AddMemberController,
-  RemoveMemberController
+  RemoveMemberController,
+  AddProdutoController,
+  RemoveProdutoController
 } = require('./controller');
 
 //controller implementations
@@ -17,5 +19,7 @@ router.post('/new', CreateController);
 router.post('/delete', DeleteController);
 router.post('/add-member', AddMemberController);
 router.post('/remove-member', RemoveMemberController);
+router.post('/add-produto', AddProdutoController);
+router.post('/remove-produto', RemoveProdutoController);
 
 module.exports = router;

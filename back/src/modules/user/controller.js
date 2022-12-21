@@ -3,7 +3,12 @@ const {
   response
 } = require('express');
 
-const { LoginService, RegisterService, GetService } = require('./service');
+const {
+  LoginService,
+  RegisterService,
+  GetService,
+  GetAllService
+} = require('./service');
 
 async function GetController (req = request, res = response) {
   const email = req.params.email;
@@ -16,6 +21,25 @@ async function GetController (req = request, res = response) {
   }
 
   const {error, data} = await GetService(email);
+
+  if(error){
+    res.send({
+      status:false,
+      message: error.message
+    });
+    return;
+  }
+
+  res.send({
+    status:true,
+    data:data
+  });
+
+}
+
+async function GetAllController (req = request, res = response) {
+
+  const {error, data} = await GetAllService();
 
   if(error){
     res.send({
@@ -88,5 +112,6 @@ async function RegisterController (req = request, res = response) {
 module.exports = {
   GetController,
   RegisterController,
-  LoginController
+  LoginController,
+  GetAllController
 }

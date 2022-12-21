@@ -15,6 +15,17 @@ async function GetService (email) {
   }
 }
 
+async function GetAllService () {
+  try{
+    const user = await UserModel.find();
+    return {
+      data:user.map(u => u.email)
+    }
+  }catch(e){
+    return {error:e}
+  }
+}
+
 async function LoginService (email, pass) {
   let error;
 
@@ -63,5 +74,6 @@ async function RegisterService(username, email, pass) {
 module.exports = {
   LoginService,
   RegisterService,
-  GetService
+  GetService,
+  GetAllService
 }
