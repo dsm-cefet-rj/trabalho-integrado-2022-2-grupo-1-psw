@@ -15,7 +15,7 @@ function Row(props) {
       <td>{props.obj.codigo}</td>
       <td>{props.obj.quantidade}</td>
       <td>
-      <Button onClick={removerProduto} className="p-1">
+      <Button onClick={removerProduto} className="p-1 px-2">
           <FaTrashAlt/>
         </Button>
       </td>
