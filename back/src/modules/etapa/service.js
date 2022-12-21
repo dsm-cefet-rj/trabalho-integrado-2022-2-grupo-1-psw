@@ -54,8 +54,8 @@ async function RemoveService(dono, nome) {
       throw new Error("Usuário não encontrado!");
     }
 
-    const etapaCheck = await EtapaModel.findOne({dono});
-    console.log(dono, nome)
+    const etapaCheck = await EtapaModel.findOne({dono, nome});
+  
     if(!etapaCheck){
       throw new Error("Etapa não existente!");
     }
