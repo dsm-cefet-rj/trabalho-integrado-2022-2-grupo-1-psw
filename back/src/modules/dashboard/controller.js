@@ -10,7 +10,7 @@ const {
 } = require('./service');
 
 async function GetController (req = request, res = response) {
-  const codigo = req.params.codigo;
+  const email = req.params.email;
   if(!codigo){
     res.send({
       status:false,
@@ -36,8 +36,9 @@ async function GetController (req = request, res = response) {
 
 }
 
+//status codigo etapa equipe nome_produto, quantidade, duracao_etapa, data_entrada, etapa
 async function NewController (req = request, res = response) {
-  const dono = req.params.dono;
+  const email = req.params.email;
   const nome = req.params.nome;
   const codigo = req.params.codigo;
   const quantidade = req.params.quantidade;
