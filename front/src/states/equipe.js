@@ -16,3 +16,13 @@ import { atom } from "recoil"
     key: 'modalNEquipe',
     default: false,
   });
+
+  export const modalGEquipe= atom({
+    key: 'modalGEquipe',
+    default: false,
+  });
+
+  export const emailConvite = atom({
+    key:'emailConvite',
+    default:'',
+  });

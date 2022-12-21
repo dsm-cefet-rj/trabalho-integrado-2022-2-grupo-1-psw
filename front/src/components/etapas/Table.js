@@ -1,11 +1,31 @@
 import Table from "react-bootstrap/Table";
 import "../../styles/produtos.css";
 import { Button } from "react-bootstrap";
+import {modalNEtapa, listaEtapa} from '../../states/etapa'
+import NovaEtapa from "../../components/etapas/NovaEtapa.js";
+import { useRecoilState } from "recoil";
 
 function Row(props) {
-  function removerEtapa() {
-    props.removeHandler(props.obj.index);
+
+
+  const [etapas, setEtapas] = useRecoilState(listaEtapa);
+
+
+
+  function removeEtapa() {
+    let etapa = props.obj.index
+    let c = window.confirm("deseja apagar está etapa?");
+    if (!c) {
+      return;
+    }
+
+    let e = [...etapas];
+    e.splice(etapa - 1, 1);
+    setEtapas(e);
   }
+
+
+  
   return (
     <tr>
       <td className="ps-4">{props.obj.index}</td>
@@ -13,7 +33,7 @@ function Row(props) {
       <td>{props.obj.duracao}</td>
 
       <td>
-        <Button onClick={removerEtapa} className="p-1">
+        <Button onClick={removeEtapa} className="p-1">
           Remover
         </Button>
       </td>
@@ -22,9 +42,7 @@ function Row(props) {
 }
 
 export default function simpleTable(props) {
-  function removeEtapa(etapa) {
-    props.removeHandler(etapa);
-  }
+
 
   return (
     <div className="border rounded bg-light t-size overflow-auto">
@@ -41,7 +59,7 @@ export default function simpleTable(props) {
         <tbody>
           {props.rows.map((row, i) => {
             return (
-              <Row removeHandler={removeEtapa} obj={{ ...row, index: i + 1 }} />
+              <Row  obj={{ ...row, index: i + 1 }} />
             );
           })}
         </tbody>

@@ -16,7 +16,11 @@ async function GetController (req = request, res = response) {
   if(!nome){
     res.send({
       status:false,
+<<<<<<< HEAD
       message: "Parâmetros obrigatórios não definidos!"
+=======
+      message: "Parâmetro obrigatório não definido!"
+>>>>>>> origin/nicolas
     });
     return;
   }
@@ -43,7 +47,11 @@ async function CreateController (req = request, res = response) {
   if(!req.body.nome || !req.body.dono){
     res.send({
       status:false,
+<<<<<<< HEAD
       message: "Parâmetros obrigatórios não definidos!"
+=======
+      message: "Campos obrigatórios não preenchidos!"
+>>>>>>> origin/nicolas
     });
     return;
   }
@@ -60,7 +68,11 @@ async function CreateController (req = request, res = response) {
 
   res.send({
     status:true,
+<<<<<<< HEAD
     data:data
+=======
+    message: "Login bem-sucedido!"
+>>>>>>> origin/nicolas
   });
 }
 
@@ -68,7 +80,11 @@ async function DeleteController (req = request, res = response) {
   if(!req.body.nome || !req.body.dono){
     res.send({
       status:false,
+<<<<<<< HEAD
       message: "Parâmetros obrigatórios não definidos!"
+=======
+      message: "Campos obrigatórios não preenchidos!"
+>>>>>>> origin/nicolas
     });
     return;
   }
@@ -85,7 +101,11 @@ async function DeleteController (req = request, res = response) {
 
   res.send({
     status:true,
+<<<<<<< HEAD
     message:"Equipe deletada com sucesso!"
+=======
+    message: "Registro bem-sucedido!"
+>>>>>>> origin/nicolas
   });
 }
 

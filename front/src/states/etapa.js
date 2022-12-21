@@ -16,3 +16,8 @@ import { atom } from "recoil"
     key: 'modalNEtapa',
     default: false,
   });
+
+  export const modalGEtapas= atom({
+    key: 'modalGEtapas',
+    default: false,
+  });
