@@ -24,7 +24,7 @@ const handleSubmit = (event) => {
     setValidated(true);
     if (form.checkValidity() === true){
       event.preventDefault();
-      setEtapa([...etapas, {nome}]);
+      setEtapa([...etapas, {nome, duracao}]);
       setNome('');
       setmodalAddEtapa(false);
     }

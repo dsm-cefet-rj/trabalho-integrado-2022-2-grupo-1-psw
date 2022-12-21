@@ -18,12 +18,13 @@ import { Button } from 'react-bootstrap';
 import { useRecoilState } from "recoil";
 import { listaEtapa } from '../../states/etapa';
 
-function createData(isLate, codigo, etapa, equipe) {
+function createData(isLate, codigo, etapa, equipe, bg) {
   return {
     isLate,
     codigo,
     etapa,
     equipe,
+    bg,
     more: [
       {
         nome: 'Blusa',
@@ -52,7 +53,7 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-            <div className={"rounded p-2 w-50 text-center fw-bold text-white text-uppercase text-nowrap overflow-hidden " + "bg-success"}>
+            <div className={"rounded p-2 w-50 text-center fw-bold text-white text-uppercase text-nowrap overflow-hidden " + row.bg}>
                 {row.isLate}
             </div>
         </TableCell>
@@ -124,13 +125,14 @@ Row.propTypes = {
         quantidade: PropTypes.number.isRequired,
         duracao: PropTypes.number.isRequired,
       }),
-    ).isRequired,
+    ).isRequired
   }).isRequired,
 };
 
 const rows = [
-  createData('Atrasado', 'b123', 'Corte', 'bonde da stronda'),
-  createData('Em dia', 'c456', 'Costura', 'tropa do cv'),
+  createData('Atrasado', 'ATX158', 'Corte', 'bonde da stronda', 'bg-danger'),
+  createData('Em dia', 'CZU958', 'Auditoria', 'tropa', 'bg-warning'),
+  createData('Em dia', 'APT392', 'Costura', 'tropa', 'bg-success'),
 ];
 
 export default function CollapsibleTable() {

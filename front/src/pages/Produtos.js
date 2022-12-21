@@ -6,11 +6,16 @@ import NovoProduto from '../components/produtos/NovoProduto.js';
 import {modalNProduto, listaProduto} from '../states/produto'
 import popup from '../components/popup'
 import NavbarComponent from "../components/Navbar";
+import { useEffect } from 'react';
 
 function Produtos() {
   const [modal, setModal] = useRecoilState(modalNProduto)
   const [produtos, setProdutos] = useRecoilState(listaProduto)
-  
+
+  useEffect(()=> {
+    localStorage.setItem('listaProduto', JSON.stringify(produtos))
+  }, [produtos])
+
   function NovoProdutoModal() {
     setModal(true)
   }
