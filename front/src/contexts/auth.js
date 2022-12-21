@@ -22,7 +22,6 @@ export const AuthProvider = ({ children }) => {
     const usersStorage = JSON.parse(localStorage.getItem("users_bd"));
 
     const hasUser = usersStorage?.filter((user) => user.email === email);
-
     if (hasUser?.length) {
       if (hasUser[0].email === email && hasUser[0].password === password) {
         const token = Math.random().toString(36).substring(2);

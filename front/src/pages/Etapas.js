@@ -20,16 +20,7 @@ function Etapas() {
     setEtapas([...etapas, etapa]);
     setModal(false);
   }
-  function removeEtapa(etapa) {
-    let c = window.confirm("deseja apagar está etapa?");
-    if (!c) {
-      return;
-    }
-
-    let e = [...etapas];
-    e.splice(etapa - 1, 1);
-    setEtapas(e);
-  }
+ 
 
   return (
     <div>
@@ -47,7 +38,7 @@ function Etapas() {
         </Button>
       </div>
       <StyledEngineProvider injectFirst>
-        <Table rows={etapas} removeHandler={removeEtapa} />
+        <Table rows={etapas} />
       </StyledEngineProvider>
     </div>
     </div>

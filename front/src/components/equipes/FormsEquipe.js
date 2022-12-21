@@ -2,15 +2,16 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useRecoilState } from 'recoil';
 import React, { useState } from 'react'; 
-import {nomeNEquipe} from '../../states/equipe'
+import { listaEquipe, modalNEquipe, nomeNEquipe } from "../../states/equipe";
+
+
 
 function FormsEquipe(props) {
   const [nome, setNome] = useRecoilState(nomeNEquipe)
+  const [equipes, setEquipe] = useRecoilState(listaEquipe);
+  const [AddEquipe, setmodalAddEquipe] = useRecoilState(modalNEquipe);
 
-  function retornaEquipe() {
-    let equipe = { nome };
-    props.novoHandler(equipe);
-  }
+
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = (event) => {
@@ -22,11 +23,11 @@ function FormsEquipe(props) {
     setValidated(true);
     if (form.checkValidity() === true){
       event.preventDefault();
-      retornaEquipe();
+      setEquipe([...equipes, {nome}]);
+      setNome('');
+      setmodalAddEquipe(false);
     }
   }
-
-
 
 
   return (

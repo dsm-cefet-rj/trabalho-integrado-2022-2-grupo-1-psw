@@ -10,7 +10,7 @@ async function GetController (req = request, res = response) {
   if(!email){
     res.send({
       status:false,
-      message: "Undefined obrigatory parameter!"
+      message: "Parâmetro obrigatório não definido!"
     });
     return;
   }
@@ -37,7 +37,7 @@ async function LoginController (req = request, res = response) {
   if(!req.body.email || !req.body.pass){
     res.send({
       status:false,
-      message: "Undefined obrigatory fields!"
+      message: "Campos obrigatórios não preenchidos!"
     });
     return;
   }
@@ -54,7 +54,7 @@ async function LoginController (req = request, res = response) {
 
   res.send({
     status:true,
-    message: "Login successful!"
+    message: "Login bem-sucedido!"
   });
 
 }
@@ -63,7 +63,7 @@ async function RegisterController (req = request, res = response) {
   if(!req.body.username || !req.body.email || !req.body.pass){
     res.send({
       status:false,
-      message: "Undefined obrigatory fields!"
+      message: "Campos obrigatórios não preenchidos!"
     });
     return;
   }
@@ -80,7 +80,7 @@ async function RegisterController (req = request, res = response) {
 
   res.send({
     status:true,
-    message: "Register successful!"
+    message: "Registro bem-sucedido!"
   });
 
 }
