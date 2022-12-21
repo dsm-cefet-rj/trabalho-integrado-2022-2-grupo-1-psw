@@ -22,7 +22,7 @@ import { atom } from "recoil"
     default: false,
   });
 
-  export const email = atom({
+  export const emailConvite = atom({
     key:'emailConvite',
     default:'',
   });

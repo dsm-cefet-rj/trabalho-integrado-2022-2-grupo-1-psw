@@ -4,7 +4,7 @@ import { Modal, Button } from "react-bootstrap";
 import FormsEquipe from "./FormsEquipe";
 import { nomeNEquipe, modalGEquipe} from "../../states/equipe";
 import { useRecoilState } from "recoil";
-
+import FormsAdicionarMembro from "../equipes/FormsAdicionarMembro"
 function GerenciarEquipe(props) {
   const [GEquipe, setmodalGEquipe] = useRecoilState(modalGEquipe);
   

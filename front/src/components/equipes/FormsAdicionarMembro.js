@@ -2,14 +2,16 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useRecoilState } from 'recoil';
 import React, { useState } from 'react'; 
+import {emailConvite} from "../../states/equipe";
+import { maskEmail } from 'react-email-mask'
+import 'react-email-mask/dist/index.css'
 
 
 function AdicionarMembro(){
-    const [email, setEmail] = useState(emailConvite);
+    const [email, setEmail] = useRecoilState(emailConvite);
 
-
-const [validated, setValidated] = useState(false);
-  const handleSubmit = (event) => {
+    const [validated, setValidated] = useState(false);
+    const handleSubmit = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -17,33 +19,40 @@ const [validated, setValidated] = useState(false);
     }
     setValidated(true);
     if (form.checkValidity() === true){
-      event.preventDefault();
-      setEquipe([...equipes, {nome}]);
-      setNome('');
-      setmodalAddEquipe(false);
+        event.preventDefault();
+        setEmail();
     }
   }
 
 
 return (
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formEmail">
-        <Form.Label>Email</Form.Label>
-        <Form.Control
+      <div className="d-flex justify-content-between">
+      <Form.Group className="mb-3 d-flex justify-content-between" controlId="formEmail">
+       <div> <Form.Label>Email</Form.Label>
+        <Form.Control type="email"
           value={email} required
           onChange={(e) => setEmail(e.target.value)}
-          type="string"
           placeholder="Digite o email para adicionar um membro"
           maxLength={30}
         />
+        </div>
+
+        <div> <Form.Label>Email</Form.Label>
+        <Button type="submit" variant="primary" className="m-2" >
+       Adicionar Membro
+      </Button>
+        </div>
+
         <Form.Control.Feedback type="invalid">
             Campo vazio ou formato inválido!
         </Form.Control.Feedback>
+        
       </Form.Group>
-      <Button type = "submit" variant="primary" className="m-2" >
-       Adicionar Membro
-      </Button>
+    
+         </div>
     </Form>
+    
   );
 }
 export default AdicionarMembro;
