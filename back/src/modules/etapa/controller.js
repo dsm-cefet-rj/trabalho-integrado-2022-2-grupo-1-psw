@@ -10,10 +10,7 @@ const {
 } = require('./service');
 
 async function GetController (req = request, res = response) {
-  const dono = req.body.dono;
-  const nome = req.body.nome;
-  const ordem = req.body.ordem;
-  const duracao = req.body.duracao;
+  const dono = req.params.email;
 
   if(!dono){
     res.send({
@@ -72,7 +69,7 @@ async function NewController (req = request, res = response) {
 }
 
 async function RemoveController (req = request, res = response) {
-  if(!req.body.username || !req.body.email || !req.body.pass){
+  if(!req.body.dono || !req.body.nome){
     res.send({
       status:false,
       message: "Campos obrigatórios não preenchidos!"
@@ -80,7 +77,7 @@ async function RemoveController (req = request, res = response) {
     return;
   }
 
-  const {error} = await RemoveService(req.body.username, req.body.email, req.body.pass);
+  const {error} = await RemoveService(req.body.dono, req.body.nome);
 
   if(error){
     res.send({
@@ -92,7 +89,7 @@ async function RemoveController (req = request, res = response) {
 
   res.send({
     status:true,
-    message: "Registro bem-sucedido!"
+    message: "Etapa removida com sucesso!"
   });
 
 }

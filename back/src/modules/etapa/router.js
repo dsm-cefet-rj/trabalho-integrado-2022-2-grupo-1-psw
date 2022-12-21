@@ -10,8 +10,8 @@ const {
 } = require('./controller');
 
 //controller implementations
-router.get('/get', GetController);
+router.get('/get/:email?', GetController);
 router.post('/new', NewController);
-router.post('/delete', RemoveController);
+router.post('/remove', RemoveController);
 
 module.exports = router;

@@ -9,7 +9,7 @@ async function GetService (dono, nome, ordem, duracao) {
       throw new Error("Usuário não encontrado!");
     }
 
-    const etapas = await EtapaModel.findOne({dono});
+    const etapas = await EtapaModel.find({dono});
     
     return {
       data:etapas
@@ -54,8 +54,8 @@ async function RemoveService(dono, nome) {
       throw new Error("Usuário não encontrado!");
     }
 
-    const etapaCheck = await EtapaModel.findOne({dono, nome});
-
+    const etapaCheck = await EtapaModel.findOne({dono});
+    console.log(dono, nome)
     if(!etapaCheck){
       throw new Error("Etapa não existente!");
     }
