@@ -1,4 +1,5 @@
 const EquipeModel = require('../database/models/equipe');
+const ProdutoModel = require('../database/models/produto');
 const UserModel = require('../database/models/user');
 
 async function GetService (nome) {
@@ -103,15 +104,81 @@ async function RemoveMemberService (equipe, email) {
       throw new Error("Equipe não encontrada!");
     }
 
+    if(equipeInstance.dono === user.email){
+      throw new Error("Usuário não pode ser removido da equipe!");
+    }
+
     if(user.equipes.indexOf(equipeInstance.nome) === -1){
       throw new Error("Usuário não é membro dessa equipe!");
     }
 
     await equipeInstance.remove(email);
-    await user.addEquipe(equipe);
+    await user.removeEquipe(equipe);
 
     await equipeInstance.save();
     await user.save();
+    
+    return {data:true}
+  }catch(e){
+    console.log(e);
+    return {error:e}
+  }
+}
+
+async function AddProdutoService (equipe, codigo) {
+  try{
+    const user = await UserModel.findOne({ codigo });
+    const equipeInstance = await EquipeModel.findOne({ nome: equipe });
+
+    if(!user){
+      throw new Error("Usuário não encontrado!");
+    }
+
+    if(!equipeInstance){
+      throw new Error("Equipe não encontrada!");
+    }
+
+    if(user.equipes.indexOf(equipeInstance.nome) !== -1){
+      throw new Error("Usuário já é membro dessa equipe!");
+    }
+
+
+
+    await equipeInstance.addMember(email);
+    await user.addEquipe(equipe);
+
+    await user.save();
+    await equipeInstance.save();
+    
+    return {data:true}
+  }catch(e){
+    console.log(e);
+    return {error:e}
+  }
+}
+
+async function RemoveProdutoService (equipe, codigo) {
+  try{
+    const produto = await UserModel.findOne({ codigo });
+    const equipeInstance = await EquipeModel.findOne({ nome: equipe });
+
+    if(!user){
+      throw new Error("Usuário não encontrado!");
+    }
+
+    if(!equipeInstance){
+      throw new Error("Equipe não encontrada!");
+    }
+
+    if(user.equipes.indexOf(equipeInstance.nome) !== -1){
+      throw new Error("Usuário já é membro dessa equipe!");
+    }
+
+    await equipeInstance.addMember(email);
+    await user.addEquipe(equipe);
+
+    await user.save();
+    await equipeInstance.save();
     
     return {data:true}
   }catch(e){
@@ -125,7 +192,7 @@ module.exports = {
   CreateService,
   DeleteService,
   AddMemberService,
-  RemoveMemberService
+  RemoveMemberService,
   AddProdutoService,
   RemoveProdutoService
 }

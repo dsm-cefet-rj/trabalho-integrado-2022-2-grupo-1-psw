@@ -16,6 +16,6 @@ router.get('/get/:nome?', GetController);
 router.post('/new', CreateController);
 router.post('/delete', DeleteController);
 router.post('/add-member', AddMemberController);
-// router.post('/remove-member', RemoveMemberController);
+router.post('/remove-member', RemoveMemberController);
 
 module.exports = router;

@@ -7,7 +7,8 @@ const {
   GetService,
   CreateService,
   DeleteService,
-  AddMemberService
+  AddMemberService,
+  RemoveMemberService
 } = require('./service');
 
 async function GetController (req = request, res = response) {
@@ -113,14 +114,35 @@ async function AddMemberController (req = request, res = response) {
   });
 }
 
-// async function RemoveMemberController (req = request, res = response) {
-//
-// }
+async function RemoveMemberController (req = request, res = response) {
+  if(!req.body.equipe || !req.body.email){
+    res.send({
+      status:false,
+      message: "Parâmetros obrigatórios não definidos!"
+    });
+    return;
+  }
+
+  const {error} = await RemoveMemberService(req.body.equipe, req.body.email);
+
+  if(error){
+    res.send({
+      status:false,
+      message: error.message
+    });
+    return;
+  }
+
+  res.send({
+    status:true,
+    message:"Membro removido com sucesso!"
+  });
+}
 
 module.exports = {
   GetController,
   CreateController,
   DeleteController,
   AddMemberController,
-  // RemoveMemberController
+  RemoveMemberController
 }
