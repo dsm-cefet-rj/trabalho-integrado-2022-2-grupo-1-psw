@@ -49,7 +49,7 @@ function Forms(props) {
 
       <Form.Group className="mb-3" controlId="formQuantidade">
       <Form.Label>Quantidade</Form.Label>
-        <Form.Control value={quantidade} required onChange={(e) => setQuantidade(e.target.value)} type="number" label="Digite a quantidade do produto" />
+        <Form.Control required value={quantidade}  onChange={(e) => setQuantidade(e.target.value)} type="number" label="Digite a quantidade do produto" />
         <Form.Control.Feedback type="invalid">
             Campo vazio ou formato inválido!
         </Form.Control.Feedback>

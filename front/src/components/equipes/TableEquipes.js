@@ -153,16 +153,26 @@ function Row(props) {
     props.removeHandler(props.obj.index);
   }
 
+  
+    function adicionarMembro() {
+  props.adicionarMembro(props.obj.membro);
+    }
+
   return (
     <tr>
       <td className="ps-4">{props.obj.index}</td>
       <td className="w-50">{props.obj.nome}</td>
       <td>{props.obj.codigo}</td>
-      <td>{props.obj.quantidade}</td>
+      <td>{props.obj.qtdMembros}</td>
+    
       <td>
+      <Button className="p-1" onClick={adicionarMembro}>
+          Adicionar membro
+        </Button>
         <Button className="p-1" onClick={removerEquipe}>
           Remover
         </Button>
+    
       </td>
     </tr>
   );
@@ -180,7 +190,7 @@ export default function simpleTable(props) {
           <tr>
             <th></th>
             <th>Nome da Equipe</th>
-            <th>Gerente</th>
+            <th>Gerente da Equipe</th>
             <th>Membros</th>
             <th></th>
           </tr>
