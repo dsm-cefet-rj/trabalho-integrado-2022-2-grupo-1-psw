@@ -27,30 +27,35 @@ function AdicionarMembro(){
 
 return (
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
-      <div className="d-flex justify-content-between">
       <Form.Group className="mb-3 d-flex justify-content-between" controlId="formEmail">
-       <div> <Form.Label>Email</Form.Label>
-        <Form.Control type="email"
+       <div className="d-flex flex-column w-75">
+        <div>
+          <Form.Label>Email</Form.Label>
+        </div>
+        <div>
+          <Form.Control type="email"
           value={email} required
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Digite o email para adicionar um membro"
-          maxLength={30}
-        />
+          maxLength={30} />
+          <Form.Control.Feedback type="invalid">
+              Campo vazio ou formato inválido!
+          </Form.Control.Feedback>
         </div>
+      </div>
 
-        <div> <Form.Label>Email</Form.Label>
-        <Button type="submit" variant="primary" className="m-2" >
-       Adicionar Membro
-      </Button>
+      <div className="d-flex flex-column">
+        <div>
+          <Form.Label className="opacity-0">Email</Form.Label>
         </div>
-
-        <Form.Control.Feedback type="invalid">
-            Campo vazio ou formato inválido!
-        </Form.Control.Feedback>
+        <div>
+          <Button type="submit" variant="primary" className="text-nowrap ms-2" >
+            Adicionar Membro
+          </Button>
+        </div>
+      </div>
         
       </Form.Group>
-    
-         </div>
     </Form>
     
   );
