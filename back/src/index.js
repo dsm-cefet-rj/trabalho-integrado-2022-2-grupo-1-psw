@@ -1,21 +1,23 @@
-const http = require('http');
+const express = require('express');
+const produtos = require("./produtos.js");
+const connectDatabase = require('./modules/database/api.js');
+const cors = require('cors');
+const produtoRoutes = require('./modules/produto/router')
 
-require('dotenv').config();
+const app = express();
+app.use(express.json())
+app.use(cors());
 
-const db = require('./modules/database/api')();
+connectDatabase();
 
-main();
+// Rotas relacionados aos produtos
+app.use("/products", produtoRoutes);
 
-async function main () {
+//Rota de apresentação
+app.get('/', (req,res) => {
+    return res.json("Bem vinde a API do Follower!");
+});
 
-  await db;
-
-  const server = require('./express.config');
-
-  const app = http.createServer(server);
-
-  app.listen(process.env.PORT, process.env.HOST, () => {
-    console.log(`Server listening on http://${process.env.HOST}:${process.env.PORT}/`)
-  });
-
-}
+app.listen(3000, () => {
+    console.log("servidor rodando na porta 3000. http://localhost:3000");
+})
