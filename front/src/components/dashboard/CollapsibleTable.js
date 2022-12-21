@@ -13,15 +13,20 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import Form from 'react-bootstrap/Form'
+import { Button } from 'react-bootstrap';
+import { useRecoilState } from "recoil";
+import { listaEtapa } from '../../states/etapa';
 
-function createData(isLate, nome, etapa) {
+function createData(isLate, codigo, etapa, equipe) {
   return {
     isLate,
-    nome,
+    codigo,
     etapa,
+    equipe,
     more: [
       {
-        codigo: 'b123',
+        nome: 'Blusa',
         quantidade: 3,
         duracao: 3,
       },
@@ -32,6 +37,7 @@ function createData(isLate, nome, etapa) {
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
+  const [etapas, setEtapas] = useRecoilState(listaEtapa);
 
   return (
     <React.Fragment>
@@ -50,8 +56,9 @@ function Row(props) {
                 {row.isLate}
             </div>
         </TableCell>
-        <TableCell align="left">{row.nome}</TableCell>
-        <TableCell align="right">{row.etapa}</TableCell>
+        <TableCell align="left">{row.codigo}</TableCell>
+        <TableCell align="left">{row.etapa}</TableCell>
+        <TableCell align="right">{row.equipe}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -60,26 +67,44 @@ function Row(props) {
               <Typography variant="h6" gutterBottom component="div">
                 Mais Informações
               </Typography>
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Código do Produto</TableCell>
-                    <TableCell>Quantidade</TableCell>
-                    <TableCell align="right">Duração da etapa atual (Dias) </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {row.more.map((moreRow) => (
-                    <TableRow key={moreRow.codigo}>
-                      <TableCell component="th" scope="row">
-                        {moreRow.codigo}
-                      </TableCell>
-                      <TableCell>{moreRow.quantidade}</TableCell>
-                      <TableCell align="right">{moreRow.duracao}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  <div className="d-flex justify-content-between mt-3">
+                   <div className="d-flex flex-column w-100">
+                    <h6 className="fw-bold">Nome do Produto</h6>
+                    <h6>teste valor</h6>
+                   </div>
+                   <div className="d-flex flex-column w-100">
+                    <h6 className="fw-bold">Quantidade</h6>
+                    <h6>teste valor</h6>
+                   </div>
+                   <div className="d-flex flex-column w-100">
+                    <h6 className="fw-bold">Duração (Dias)</h6>
+                    <h6>teste valor</h6>
+                   </div>
+                   <div className="d-flex flex-column w-100">
+                    <h6 className="fw-bold">Atraso (Dias)</h6>
+                    <h6>teste valor</h6>
+                   </div>                        
+                </div>
+                <div className="d-flex justify-content-between mt-2">
+                   <div className="d-flex flex-column w-100">
+                    <h6 className="fw-bold">Data de Entrada</h6>
+                    <h6>teste valor</h6>
+                   </div>
+                   <div className="d-flex flex-column w-100">
+                    <h6 className="fw-bold opacity-0"> . </h6>
+                    <h6 className="fw-bold opacity-0"> . </h6>
+                   </div>
+                   <div className="d-flex flex-column w-100">
+                    <h6 className="fw-bold">Etapa</h6>
+                    <Form.Select className="w-75">{etapas.map(v => {
+                        return <option value={v.ordem}>{v.nome}</option>
+                    })}</Form.Select>
+                   </div>
+                   <div className="d-flex flex-column w-100">
+                    <h6 className="fw-bold opacity-0"> . </h6>
+                    <div><Button>Salvar</Button></div>
+                   </div>                        
+                </div>
             </Box>
           </Collapse>
         </TableCell>
@@ -104,8 +129,8 @@ Row.propTypes = {
 };
 
 const rows = [
-  createData('Atrasado', 'Blusa', 'Corte'),
-  createData('Em dia', 'Calça', 'Costura'),
+  createData('Atrasado', 'b123', 'Corte', 'bonde da stronda'),
+  createData('Em dia', 'c456', 'Costura', 'tropa do cv'),
 ];
 
 export default function CollapsibleTable() {
@@ -116,8 +141,9 @@ export default function CollapsibleTable() {
           <TableRow>
             <TableCell />
             <TableCell>Status</TableCell>
-            <TableCell align="left">Nome do Produto</TableCell>
-            <TableCell align="right">Etapa Atual</TableCell>
+            <TableCell align="left">Código do Produto</TableCell>
+            <TableCell align="left">Etapa</TableCell>
+            <TableCell align="right">Equipe</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

@@ -24,7 +24,6 @@ function NavbarComponent() {
             <Nav.Link href="/"></Nav.Link>
             <Nav.Link href="Dashboard">Dashboard</Nav.Link>
             <Nav.Link href="Produtos">Produtos</Nav.Link>
-            <Nav.Link href="Cadeias">Cadeias Produtivas</Nav.Link>
             <Nav.Link href="Etapas">Etapas</Nav.Link>
             <Nav.Link href="Equipes">Equipes</Nav.Link>
           </Nav> 
