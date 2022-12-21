@@ -3,19 +3,24 @@ const {
   response
 } = require('express');
 
-const { LoginService, RegisterService, GetService } = require('./service');
+const {
+  GetService,
+  CreateService,
+  DeleteService,
+  AddMemberService
+} = require('./service');
 
 async function GetController (req = request, res = response) {
-  const email = req.params.email;
-  if(!email){
+  const nome = req.params.nome;
+  if(!nome){
     res.send({
       status:false,
-      message: "Undefined obrigatory parameter!"
+      message: "Parâmetros obrigatórios não definidos!"
     });
     return;
   }
 
-  const {error, data} = await GetService(email);
+  const {error, data} = await GetService(nome);
 
   if(error){
     res.send({
@@ -32,17 +37,17 @@ async function GetController (req = request, res = response) {
 
 }
 
-async function LoginController (req = request, res = response) {
-
-  if(!req.body.email || !req.body.pass){
+async function CreateController (req = request, res = response) {
+  
+  if(!req.body.nome || !req.body.dono){
     res.send({
       status:false,
-      message: "Undefined obrigatory fields!"
+      message: "Parâmetros obrigatórios não definidos!"
     });
     return;
   }
 
-  const {error} = await LoginService(req.body.email, req.body.pass);
+  const {error, data} = await CreateService(req.body.nome, req.body.dono);
 
   if(error){
     res.send({
@@ -54,21 +59,20 @@ async function LoginController (req = request, res = response) {
 
   res.send({
     status:true,
-    message: "Login successful!"
+    data:data
   });
-
 }
 
-async function RegisterController (req = request, res = response) {
-  if(!req.body.username || !req.body.email || !req.body.pass){
+async function DeleteController (req = request, res = response) {
+  if(!req.body.nome || !req.body.dono){
     res.send({
       status:false,
-      message: "Undefined obrigatory fields!"
+      message: "Parâmetros obrigatórios não definidos!"
     });
     return;
   }
 
-  const {error} = await RegisterService(req.body.username, req.body.email, req.body.pass);
+  const {error, data} = await DeleteService(req.body.nome, req.body.dono);
 
   if(error){
     res.send({
@@ -80,13 +84,43 @@ async function RegisterController (req = request, res = response) {
 
   res.send({
     status:true,
-    message: "Register successful!"
+    message:"Equipe deletada com sucesso!"
   });
-
 }
+
+async function AddMemberController (req = request, res = response) {
+  if(!req.body.equipe || !req.body.email){
+    res.send({
+      status:false,
+      message: "Parâmetros obrigatórios não definidos!"
+    });
+    return;
+  }
+
+  const {error} = await AddMemberService(req.body.equipe, req.body.email);
+
+  if(error){
+    res.send({
+      status:false,
+      message: error.message
+    });
+    return;
+  }
+
+  res.send({
+    status:true,
+    message:"Membro adicionado com sucesso!"
+  });
+}
+
+// async function RemoveMemberController (req = request, res = response) {
+//
+// }
 
 module.exports = {
   GetController,
-  RegisterController,
-  LoginController
+  CreateController,
+  DeleteController,
+  AddMemberController,
+  // RemoveMemberController
 }

@@ -28,6 +28,18 @@ userSchema.methods.validPassword = function(password) {
   return this.hash === hash;
 };
 
+userSchema.methods.addEquipe = function(nome) {
+  if(this.equipes.indexOf(nome) === -1){
+    this.equipes.push(nome);
+  }
+};
+
+userSchema.methods.removeEquipe = function(nome) {
+  if(this.equipes.indexOf(nome) !== -1){
+    this.equipes.splice(this.equipes.indexOf(nome), 1);
+  }
+};
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;

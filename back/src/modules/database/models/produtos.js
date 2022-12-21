@@ -13,6 +13,10 @@ const Produtos = moongose.model('Produtos', {
     type: Number,
     required: true
   },
+  dono:String,
+  equipe:Array,
+  etapa:String,
+  data_entrada: Date
 });
 
 module.exports = Produtos; 

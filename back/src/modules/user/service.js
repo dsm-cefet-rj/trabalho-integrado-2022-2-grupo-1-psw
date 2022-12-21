@@ -44,7 +44,13 @@ async function LoginService (email, pass) {
 async function RegisterService(username, email, pass) {
 
   try{
-    const user = await UserModel.create({user:username, email});
+    let user = await UserModel.findOne({email});
+
+    if(!!user){
+      return { error:new Error("Email já cadastrado!") };
+    }
+
+    user = await UserModel.create({user:username, email});
     await user.setPassword(pass);
     await user.save();
     return { data:true };
