@@ -1,9 +1,9 @@
 import api from "./api";
 
-export async function login(userObject){
+export async function UserLogin(userObject){
   try{
 
-    const {data} = await api.post('/login', userObject);
+    const {data} = await api.post('/user/login', userObject);
     return data;
 
   }catch(e){
@@ -16,10 +16,10 @@ export async function login(userObject){
   }
 }
 
-export async function register(userObject){
+export async function UserRegister(userObject){
   try{
 
-  const {data} = await api.post('/register', userObject);
+  const {data} = await api.post('/user/register', userObject);
   return data;
 
   }catch(e){

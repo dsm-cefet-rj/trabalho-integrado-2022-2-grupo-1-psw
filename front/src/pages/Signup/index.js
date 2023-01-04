@@ -6,9 +6,10 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 const Signup = () => {
+  const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
-  const [emailConf, setEmailConf] = useState("");
   const [senha, setSenha] = useState("");
+  const [senhaConf, setSenhaConf] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -17,12 +18,12 @@ const Signup = () => {
   const isEmail = (email) =>
   /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
 
-  const handleSignup = () => {
-    if (!email | !emailConf | !senha) {
+  const handleSignup = async () => {
+    if (!email | !senhaConf | !senha | !user) {
       setError("Preencha todos os campos");
       return;
-    } else if (email !== emailConf) {
-        setError("Os e-mails não são iguais");
+    } else if (senha !== senhaConf) {
+        setError("As senhas não são iguais");
         return;
     }
       else if (!isEmail(email)) {
@@ -30,7 +31,7 @@ const Signup = () => {
         return;
     }
 
-    const res = signup(email, senha);
+    const res = await signup(user, email, senha);
 
     if (res) {
       setError(res);
@@ -38,7 +39,7 @@ const Signup = () => {
     }
 
     alert("Usuário cadatrado com sucesso!");
-    navigate("/");
+    navigate("/dashboard");
   };
 
   return (
@@ -46,22 +47,28 @@ const Signup = () => {
       <C.Label>Cadastro</C.Label>
       <C.Content>
         <Input
+          type="text"
+          placeholder="Digite seu Usuario"
+          value={user}
+          onChange={(e) => [setUser(e.target.value), setError("")]}
+        />
+        <Input
           type="email"
           placeholder="Digite seu E-mail"
           value={email}
           onChange={(e) => [setEmail(e.target.value), setError("")]}
         />
         <Input
-          type="email"
-          placeholder="Confirme seu E-mail"
-          value={emailConf}
-          onChange={(e) => [setEmailConf(e.target.value), setError("")]}
-        />
-        <Input
           type="password"
           placeholder="Digite sua Senha"
           value={senha}
           onChange={(e) => [setSenha(e.target.value), setError("")]}
+        />
+        <Input
+          type="password"
+          placeholder="Confirme sua Senha"
+          value={senhaConf}
+          onChange={(e) => [setSenhaConf(e.target.value), setError("")]}
         />
         <C.labelError>{error}</C.labelError>
         <Button variant="primary" className='m-2' onClick={handleSignup}>

@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { UserLogin, UserRegister } from "../service/user";
 
 export const AuthContext = createContext({});
 
@@ -6,57 +7,54 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    const userToken = localStorage.getItem("user_token");
-    const usersStorage = localStorage.getItem("users_bd");
 
-    if (userToken && usersStorage) {
-      const hasUser = JSON.parse(usersStorage)?.filter(
-        (user) => user.email === JSON.parse(userToken).email
-      );
-
-      if (hasUser) setUser(hasUser[0]);
+    const userToken = JSON.parse(localStorage.getItem("user_token"));
+    if (userToken) {
+      signin(userToken.email, userToken.pass);
     }
+
   }, []);
 
-  const signin = (email, password) => {
-    const usersStorage = JSON.parse(localStorage.getItem("users_bd"));
+  const signin = async (email, pass) => {
 
-    const hasUser = usersStorage?.filter((user) => user.email === email);
-    if (hasUser?.length) {
-      if (hasUser[0].email === email && hasUser[0].password === password) {
-        const token = Math.random().toString(36).substring(2);
-        localStorage.setItem("user_token", JSON.stringify({ email, token }));
-        setUser({ email, password });
-        return;
-      } else {
-        return "E-mail ou senha incorretos";
-      }
-    } else {
-      return "Usuário não cadastrado";
-    }
-  };
-
-  const signup = (email, password) => {
-    const usersStorage = JSON.parse(localStorage.getItem("users_bd"));
-
-    const hasUser = usersStorage?.filter((user) => user.email === email);
-
-    if (hasUser?.length) {
-      return "Já tem uma conta com esse E-mail";
+    let userObject = {
+      email,
+      pass
     }
 
-    let newUser;
+    const result = await UserLogin(userObject);
 
-    if (usersStorage) {
-      newUser = [...usersStorage, { email, password }];
-    } else {
-      newUser = [{ email, password }];
+    if(result['status'] === true){
+      localStorage.setItem("user_token", JSON.stringify(userObject));
+      setUser(userObject);
+
+    }else{
+      return result['message'];
+    }
+  }
+
+  const signup = async (username, email, pass) => {
+
+    let userObject = {
+      username,
+      email,
+      pass
     }
 
-    localStorage.setItem("users_bd", JSON.stringify(newUser));
+    const result = await UserRegister(userObject);
 
-    return;
-  };
+    if(result.status === true){
+      userObject = {
+        email: userObject.email,
+        pass: userObject.pass
+      };
+
+      localStorage.setItem("user_token", JSON.stringify(userObject));
+      setUser(userObject);
+    }else{
+      return result['message'];
+    }
+  }
 
   const signout = () => {
     setUser(null);

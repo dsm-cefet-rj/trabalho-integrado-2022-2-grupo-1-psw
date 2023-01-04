@@ -6,9 +6,9 @@ const router = require('./modules/router');
 const app = express();
 
 var corsOptions = {
-  allowedHeaders:true,
+  allowedHeaders:false,
   credentials: true,
-  origin:'*'
+  origin:'*',
 }
 
 app.use(cors(corsOptions));
