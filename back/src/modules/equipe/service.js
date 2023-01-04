@@ -139,7 +139,7 @@ async function AddProdutoService (equipe, codigo) {
       throw new Error("Produto não encontrado!");
     }
 
-    if(produto.equipes.indexOf(equipeInstance.nome) !== -1){
+    if(produto.equipe.indexOf(equipeInstance.nome) !== -1){
       throw new Error("Esse produto já é compartilhado com essa equipe!");
     }
 
@@ -170,7 +170,7 @@ async function RemoveProdutoService (equipe, codigo) {
       throw new Error("Produto não encontrado!");
     }
 
-    if(produto.equipes.indexOf(equipeInstance.nome) === -1){
+    if(produto.equipe.indexOf(equipeInstance.nome) === -1){
       throw new Error("Esse não é compartilhado com essa equipe!");
     }
 

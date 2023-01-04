@@ -6,7 +6,8 @@ const {
 const { 
   GetService,
   DeleteService,
-  NewService
+  NewService,
+  GetAllService
 } = require('./service');
 
 async function GetController (req = request, res = response) {
@@ -36,11 +37,38 @@ async function GetController (req = request, res = response) {
 
 }
 
+async function GetAllController (req = request, res = response) {
+  const email = req.params.email;
+  if(!email){
+    res.send({
+      status:false,
+      message: "Parametros obrigatórios não definidos!"
+    });
+    return;
+  }
+
+  const {error, data} = await GetAllService(email);
+
+  if(error){
+    res.send({
+      status:false,
+      message: error.message
+    });
+    return;
+  }
+
+  res.send({
+    status:true,
+    data:data
+  });
+
+}
+
 async function NewController (req = request, res = response) {
-  const dono = req.params.dono;
-  const nome = req.params.nome;
-  const codigo = req.params.codigo;
-  const quantidade = req.params.quantidade;
+  const dono = req.body.dono;
+  const nome = req.body.nome;
+  const codigo = req.body.codigo;
+  const quantidade = req.body.quantidade;
 
   if(!dono || !codigo || !quantidade || !nome){
     res.send({
@@ -68,8 +96,8 @@ async function NewController (req = request, res = response) {
 }
 
 async function DeleteController (req = request, res = response) {
-  const dono = req.params.dono;
-  const codigo = req.params.codigo;
+  const dono = req.body.dono;
+  const codigo = req.body.codigo;
 
   if(!dono || !codigo){
     res.send({
@@ -99,5 +127,6 @@ async function DeleteController (req = request, res = response) {
 module.exports = {
   GetController,
   NewController,
-  DeleteController
+  DeleteController,
+  GetAllController
 }
