@@ -20,3 +20,7 @@ const str = localStorage.getItem('listaProduto') ? localStorage.getItem('listaPr
     key: 'modalNProduto',
     default: false,
   });
+  export const modalGProduto= atom({
+    key: 'modalGProduto',
+    default: false,
+  });

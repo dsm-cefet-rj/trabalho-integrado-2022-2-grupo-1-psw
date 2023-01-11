@@ -2,19 +2,16 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import React, { useState } from 'react'; 
 import { useRecoilState } from 'recoil';
-import {nomeNProduto, codigoNProduto, quantidadeNProduto} from '../../states/produto'
+import {nomeNProduto, codigoNProduto, quantidadeNProduto, listaProduto, modalNProduto} from '../../states/produto'
 
 function Forms(props) {
   const [nome, setNome] = useRecoilState(nomeNProduto)
   const [codigo, setCodigo] = useRecoilState(codigoNProduto)
   const [quantidade, setQuantidade] = useRecoilState(quantidadeNProduto)
+  const [produtos, setProduto] = useRecoilState(listaProduto);
+  const [AddProduto, setmodalAddProduto] = useRecoilState(modalNProduto);
 
   const [validated, setValidated] = useState(false);
-
-  function retornaProduto(){
-    let produto = {nome, codigo, quantidade}
-    props.novoHandler(produto)
-  }
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -25,7 +22,11 @@ function Forms(props) {
     setValidated(true);
     if (form.checkValidity() === true){
       event.preventDefault();
-      retornaProduto();
+      setProduto([...produtos, {nome, codigo, quantidade}]);
+      setNome('');
+      setCodigo('');
+      setQuantidade();
+      setmodalAddProduto(false);
     }
   }
 

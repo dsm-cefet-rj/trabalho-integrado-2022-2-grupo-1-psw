@@ -2,10 +2,18 @@ import Table from 'react-bootstrap/Table';
 import '../../styles/produtos.css';
 import { Button } from 'react-bootstrap';
 import {FaTrashAlt} from 'react-icons/fa'
+import { useRecoilState } from "recoil";
+import { modalGProduto } from "../../states/produto";
 
 function Row(props) {
+  const [GProduto, setmodalGProduto] = useRecoilState(modalGProduto);
+
   function removerProduto() {
     props.removeHandler(props.obj.index);
+  }
+
+  function modalGProdutoON() {
+    setmodalGProduto(true);
   }
 
   return (
