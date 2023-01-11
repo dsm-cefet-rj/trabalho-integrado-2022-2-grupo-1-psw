@@ -1,5 +1,6 @@
 const UserModel = require("../database/models/user");
 const EtapaModel = require("../database/models/etapa");
+const ProdutoModel = require("../database/models/produto");
 
 async function GetService(dono, nome, ordem, duracao) {
   try {
@@ -71,8 +72,39 @@ async function RemoveService(dono, nome) {
   }
 }
 
+async function UpdateService(dono, codigo, etapa) {
+  try {
+    const user = await UserModel.findOne({ email: dono });
+
+    if (!user) {
+      throw new Error("Usuário não encontrado!");
+    }
+
+    const etapaCheck = await EtapaModel.findOne({ dono, codigo:etapa });
+
+    if (!etapaCheck) {
+      throw new Error("Etapa não existente!");
+    }
+
+    const produtoCheck = await ProdutoModel.findOne({ dono, codigo });
+
+    if (!produtoCheck) {
+      throw new Error("produto não existente!");
+    }
+    
+    await ProdutoModel.updateOne({ dono, codigo }, {etapa:parseInt(etapa), data_entrada:new Date()});
+
+    return {
+      data: true,
+    };
+  } catch (e) {
+    return { error: e };
+  }
+}
+
 module.exports = {
   GetService,
   NewService,
   RemoveService,
+  UpdateService
 };

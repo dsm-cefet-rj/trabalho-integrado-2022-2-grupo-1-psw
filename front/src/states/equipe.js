@@ -1,7 +1,5 @@
 import { atom } from "recoil";
-const str = localStorage.getItem("listaEquipe")
-  ? localStorage.getItem("listaEquipe")
-  : "[]";
+
 export const nomeNEquipe = atom({
   key: "nomeNEquipe",
   default: "",
@@ -12,7 +10,7 @@ export const duracaoNEquipe = atom({
 });
 export const listaEquipe = atom({
   key: "listaEquipe",
-  default: JSON.parse(str),
+  default: [],
 });
 export const modalNEquipe = atom({
   key: "modalNEquipe",
@@ -26,6 +24,11 @@ export const modalGEquipe = atom({
 
 export const emailConvite = atom({
   key: "emailConvite",
+  default: "",
+});
+
+export const produtoConvite = atom({
+  key: "produtoConvite",
   default: "",
 });
 

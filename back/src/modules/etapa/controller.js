@@ -1,6 +1,6 @@
 const { request, response } = require("express");
 
-const { RemoveService, GetService, NewService } = require("./service");
+const { RemoveService, GetService, NewService, UpdateService } = require("./service");
 
 async function GetController(req = request, res = response) {
   const dono = req.params.email;
@@ -84,8 +84,34 @@ async function RemoveController(req = request, res = response) {
   });
 }
 
+async function UpdateController(req = request, res = response) {
+  if (!req.body.dono || !req.body.codigo || !req.body.etapa ) {
+    res.send({
+      status: false,
+      message: "Campos obrigatórios não preenchidos!",
+    });
+    return;
+  }
+
+  const { error } = await UpdateService(req.body.dono, req.body.codigo, req.body.etapa);
+
+  if (error) {
+    res.send({
+      status: false,
+      message: error.message,
+    });
+    return;
+  }
+
+  res.send({
+    status: true,
+    message: "Salvo com sucesso!",
+  });
+}
+
 module.exports = {
   GetController,
   NewController,
   RemoveController,
+  UpdateController
 };

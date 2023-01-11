@@ -19,6 +19,6 @@ const EtapaSchema = new mongoose.Schema({
   },
 });
 
-const Equipe = mongoose.model("Etapa", EtapaSchema);
+const EtapaModel = mongoose.model("Etapa", EtapaSchema);
 
-module.exports = Equipe;
+module.exports = EtapaModel;

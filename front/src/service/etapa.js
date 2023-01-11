@@ -12,6 +12,18 @@ export async function EtapaGet(userObject) {
   }
 }
 
+export async function UpdateEtapaProduto(produtoObject) {
+  try {
+    const { data } = await api.post("/etapa/update/", produtoObject);
+    return data;
+  } catch (e) {
+    return {
+      status: false,
+      message: e.message,
+    };
+  }
+}
+
 export async function EtapaCreate(etapaObject) {
   try {
     const { data } = await api.post("/etapa/new", etapaObject);

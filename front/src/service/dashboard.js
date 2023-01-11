@@ -16,16 +16,17 @@ export async function EquipeCreate(EquipeObject) {
 //   api.get('/equipe/get/'+equipe_name);
 // }
 
-export async function EquipeLoadAll(userObject) {
+export async function DashboardLoadAll(userObject) {
   try {
-    const { data } = await api.get("/equipe/get-all/" + userObject.email);
-    return data;
+    const prods = await api.get("/produto/get-dashboard/" + userObject.email);
+    return prods.data
   } catch (e) {
     return {
       status: false,
       message: e.message,
     };
   }
+
 }
 
 // export function EquipeSave(EquipeObject){

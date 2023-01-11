@@ -4,16 +4,17 @@ import { useRecoilState } from "recoil";
 import React, { useState } from "react";
 import {
   emailConvite,
+  produtoConvite,
   equipeGerenciada as equipeGerenciadaAtom,
   listaEquipe as listaEquipeAtom
 } from "../../states/equipe";
 import "react-email-mask/dist/index.css";
-import { EquipeAddMember } from "../../service/equipe";
+import { EquipeAddProduto } from "../../service/equipe";
 
-function AdicionarMembro() {
+function AdicionarProduto() {
   const [listaEquipe, setListaEquipe] = useRecoilState(listaEquipeAtom);
   const [equipeGerenciada, setEquipeGerenciada] = useRecoilState(equipeGerenciadaAtom);
-  const [email, setEmail] = useRecoilState(emailConvite);
+  const [codigo, setCodigo] = useRecoilState(produtoConvite);
 
   const [validated, setValidated] = useState(false);
   const handleSubmit = async (event) => {
@@ -25,11 +26,11 @@ function AdicionarMembro() {
     }
     setValidated(true);
     if (form.checkValidity() === true) {
-      const membroObj = {
+      const produtoObj = {
         equipe: listaEquipe[equipeGerenciada].nome,
-        email
+        codigo
       };
-      const resp = await EquipeAddMember(membroObj);
+      const resp = await EquipeAddProduto(produtoObj);
       if (!resp.status) {
         window.alert(resp.message);
         return;
@@ -37,12 +38,12 @@ function AdicionarMembro() {
       let equipes = [...listaEquipe];
       let newObj = Object.assign({}, equipes[equipeGerenciada]);
 
-      newObj['usuarios'] = Array.from(newObj['usuarios']);
-      newObj['usuarios'].push(email)
+      newObj['produtos'] = Array.from(newObj['produtos']);
+      newObj['produtos'].push(codigo)
       equipes[equipeGerenciada] = newObj;
       setListaEquipe(equipes);
 
-      window.alert("Membro adicionado com sucesso!");
+      window.alert("Produto adicionado com sucesso!");
     }
   };
 
@@ -54,15 +55,15 @@ function AdicionarMembro() {
       >
         <div className="d-flex flex-column w-75">
           <div>
-            <Form.Label>Email</Form.Label>
+            <Form.Label>Código</Form.Label>
           </div>
           <div>
             <Form.Control
-              type="email"
-              value={email}
+              type="text"
+              value={codigo}
               required
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Digite o email para adicionar um membro"
+              onChange={(e) => setCodigo(e.target.value)}
+              placeholder="Digite o código para adicionar um produto"
               maxLength={30}
             />
             <Form.Control.Feedback type="invalid">
@@ -73,7 +74,7 @@ function AdicionarMembro() {
 
         <div className="d-flex flex-column">
           <div>
-            <Form.Label className="opacity-0">Email</Form.Label>
+            <Form.Label className="opacity-0">Produto</Form.Label>
           </div>
           <div>
             <Button
@@ -89,4 +90,4 @@ function AdicionarMembro() {
     </Form>
   );
 }
-export default AdicionarMembro;
+export default AdicionarProduto;

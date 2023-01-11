@@ -5,6 +5,7 @@ const {
   DeleteService,
   NewService,
   GetAllService,
+  GetDashboardService,
 } = require("./service");
 
 async function GetController(req = request, res = response) {
@@ -44,6 +45,32 @@ async function GetAllController(req = request, res = response) {
   }
 
   const { error, data } = await GetAllService(email);
+
+  if (error) {
+    res.send({
+      status: false,
+      message: error.message,
+    });
+    return;
+  }
+
+  res.send({
+    status: true,
+    data: data,
+  });
+}
+
+async function GetDashboardController(req = request, res = response) {
+  const email = req.params.email;
+  if (!email) {
+    res.send({
+      status: false,
+      message: "Parametros obrigatórios não definidos!",
+    });
+    return;
+  }
+
+  const { error, data } = await GetDashboardService(email);
 
   if (error) {
     res.send({
@@ -122,4 +149,5 @@ module.exports = {
   NewController,
   DeleteController,
   GetAllController,
+  GetDashboardController
 };

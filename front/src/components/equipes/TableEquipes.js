@@ -2,12 +2,17 @@ import Table from "react-bootstrap/Table";
 import "../../styles/modalAddEquipe.css";
 import { Button } from "react-bootstrap";
 import { useRecoilState } from "recoil";
-import { modalGEquipe, listaEquipe } from "../../states/equipe";
+import {
+  equipeGerenciada as equipeGerenciadaAtom,
+  modalGEquipe,
+  listaEquipe } from "../../states/equipe";
 import { EquipeDelete } from "../../service/equipe";
 
 function Row(props) {
+
   const [equipes, setEquipe] = useRecoilState(listaEquipe);
   const [GEquipe, setmodalGEquipe] = useRecoilState(modalGEquipe);
+  const [equipeGerenciada, setEquipeGerenciada] = useRecoilState(equipeGerenciadaAtom);
 
   async function removerEquipe() {
     const user = JSON.parse(localStorage.getItem("user_token"));
@@ -33,6 +38,7 @@ function Row(props) {
 
   function modalGEquipeON() {
     setmodalGEquipe(true);
+    setEquipeGerenciada(`${parseInt(props.obj.index-1)}`);
   }
 
   return (
