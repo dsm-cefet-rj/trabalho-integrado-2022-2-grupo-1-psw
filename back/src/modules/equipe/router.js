@@ -5,6 +5,7 @@ const router = Router();
 //controller imports
 const {
   GetController,
+  GetAllController,
   CreateController,
   DeleteController,
   AddMemberController,
@@ -15,6 +16,7 @@ const {
 
 //controller implementations
 router.get('/get/:nome?', GetController);
+router.get('/get-all/:email?', GetAllController);
 router.post('/new', CreateController);
 router.post('/delete', DeleteController);
 router.post('/add-member', AddMemberController);

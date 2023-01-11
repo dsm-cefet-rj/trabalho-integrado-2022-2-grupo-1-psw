@@ -5,6 +5,7 @@ const {
 
 const {
   GetService,
+  GetAllService,
   CreateService,
   DeleteService,
   AddMemberService,
@@ -24,6 +25,33 @@ async function GetController (req = request, res = response) {
   }
 
   const {error, data} = await GetService(nome);
+
+  if(error){
+    res.send({
+      status:false,
+      message: error.message
+    });
+    return;
+  }
+
+  res.send({
+    status:true,
+    data:data
+  });
+
+}
+
+async function GetAllController (req = request, res = response) {
+  const email = req.params.email;
+  if(!email){
+    res.send({
+      status:false,
+      message: "Parâmetros obrigatórios não definidos!"
+    });
+    return;
+  }
+
+  const {error, data} = await GetAllService(email);
 
   if(error){
     res.send({
@@ -198,5 +226,6 @@ module.exports = {
   AddMemberController,
   RemoveMemberController,
   AddProdutoController,
-  RemoveProdutoController
+  RemoveProdutoController,
+  GetAllController
 }

@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import { useRecoilState } from 'recoil';
 import React, { useState } from 'react'; 
 import { listaEquipe, modalNEquipe, nomeNEquipe } from "../../states/equipe";
+import { EquipeCreate } from "../../service/equipe";
 
 
 
@@ -14,7 +15,7 @@ function FormsEquipe(props) {
 
   const [validated, setValidated] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -23,6 +24,16 @@ function FormsEquipe(props) {
     setValidated(true);
     if (form.checkValidity() === true){
       event.preventDefault();
+      const user = JSON.parse(localStorage.getItem("user_token"));
+      const equipeObj = {
+          "dono":user.email,
+          nome
+      }
+      const resp = await EquipeCreate(equipeObj);
+      if(!resp.status){
+        window.alert(resp.message);
+        return;
+      }
       setEquipe([...equipes, {nome}]);
       setNome('');
       setmodalAddEquipe(false);

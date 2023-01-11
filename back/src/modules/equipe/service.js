@@ -23,6 +23,20 @@ async function GetService (nome) {
   }
 }
 
+async function GetAllService (email) {
+  try{
+    const equipe = await EquipeModel.find({dono:email});
+    if(!!equipe){
+      return {data:equipe}
+    }else{
+      throw new Error("Equipe não encontrada!");
+    }
+  }catch(e){
+    console.log(e);
+    return {error:e}
+  }
+}
+
 async function CreateService (nome, dono) {
   try{
     const equipe = await EquipeModel.findOne({nome});
@@ -189,6 +203,7 @@ async function RemoveProdutoService (equipe, codigo) {
 
 module.exports = {
   GetService,
+  GetAllService,
   CreateService,
   DeleteService,
   AddMemberService,

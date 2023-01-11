@@ -26,3 +26,8 @@ const str = localStorage.getItem('listaEquipe') ? localStorage.getItem('listaEqu
     key:'emailConvite',
     default:'',
   });
+
+  export const equipeGerenciada = atom({
+    key:'equipeGerenciada',
+    default:'',
+  });

@@ -1,22 +1,41 @@
 import Table from "react-bootstrap/Table";
 import "../../styles/modalAddEquipe.css";
 import { Button } from "react-bootstrap";
-import Equipes from "../../pages/Equipes";
 import { useRecoilState } from "recoil";
-import { modalGEquipe } from "../../states/equipe";
+import { modalGEquipe, listaEquipe } from "../../states/equipe";
+import { EquipeDelete } from "../../service/equipe";
 
 function Row(props) {
 
+  const [equipes, setEquipe] = useRecoilState(listaEquipe);
   const [GEquipe, setmodalGEquipe] = useRecoilState(modalGEquipe);
 
-  function removerEquipe() {
-    props.removeHandler(props.obj.index);
+  async function removerEquipe() {
+    const user = JSON.parse(localStorage.getItem("user_token"));
+    let c = window.confirm("Deseja apagar esta equipe?");
+    if (!c) {
+      return;
+    }
+
+    const resp = await EquipeDelete({
+      dono:user.email,
+      nome:props.obj.nome
+    });
+
+    if(!resp.status){
+      window.alert(resp.message);
+      return;
+    }
+
+    let e = [...equipes];
+    e.splice(parseInt(props.obj.index) - 1, 1);
+    setEquipe(e);
   }
 
   
-    function modalGEquipeON() {
-      setmodalGEquipe(true);
-    }
+  function modalGEquipeON() {
+    setmodalGEquipe(true);
+  }
 
   return (
     <tr>
@@ -39,9 +58,6 @@ function Row(props) {
 }
 
 export default function simpleTable(props) {
-  function removerEquipe(equipe) {
-    props.removeHandler(equipe);
-  }
 
   return (
     <div className="border rounded bg-light t-size overflow-auto">
@@ -59,7 +75,6 @@ export default function simpleTable(props) {
           {props.rows.map((row, i) => {
             return (
               <Row
-                removeHandler={removerEquipe}
                 obj={{ ...row, index: i + 1 }}
               />
             );
