@@ -6,50 +6,43 @@ import NovoProduto from '../components/produtos/NovoProduto.js';
 import {modalNProduto, listaProduto} from '../states/produto'
 import popup from '../components/popup'
 import NavbarComponent from "../components/Navbar";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { ProdutoLoadAll } from '../service/produto.js';
 
 function Produtos() {
-  const [modal, setModal] = useRecoilState(modalNProduto)
-  const [produtos, setProdutos] = useRecoilState(listaProduto)
+  const [mounted, setMounted] = useState(false);
+  const [modal, setModal] = useRecoilState(modalNProduto);
+  const [produtos, setProdutos] = useRecoilState(listaProduto);
+
+  async function loadResources () {
+    const user = JSON.parse(localStorage.getItem("user_token"));
+    const produtoResource = await ProdutoLoadAll(user);
+    setProdutos(produtoResource.data);
+    setMounted(true);
+  }
 
   useEffect(()=> {
-    localStorage.setItem('listaProduto', JSON.stringify(produtos))
-  }, [produtos])
+    if(!mounted){
+      loadResources();
+    }
+  }, []);
+
 
   function NovoProdutoModal() {
-    setModal(true)
+    setModal(true);
   }
-  
-  function NovoProdutoModalClose(){
-    setModal(false)
-  }
-  
-  function novoHandler2(produto){
-    setProdutos([...produtos, produto])
-    setModal (false)
-  }
-
-  function removeProduto(produto) {
-    let c = window.confirm("deseja apagar está etapa?");
-    if(!c){
-     return
-    }
-     let e =  [...produtos]
-       e.splice (produto -1, 1)
-       setProdutos (e) 
-       }
   
   return (
     <div>
       <NavbarComponent />
       <div className='container mt-3'>
-      <NovoProduto show={modal} cHandler={NovoProdutoModalClose} novoHandler2={novoHandler2}/>
+      <NovoProduto show={modal} />
       <div className='d-flex flex-row justify-content-between w-100 mb-3'>
           <h1>Produto</h1>
           <Button className="m-2" onClick={NovoProdutoModal}>Novo Produto</Button>
         </div>
       <StyledEngineProvider injectFirst>
-        <Table rows={produtos} removeHandler={removeProduto}/>
+        <Table rows={produtos}/>
       </StyledEngineProvider>
     </div>
     </div>

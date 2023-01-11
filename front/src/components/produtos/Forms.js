@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import React, { useState } from 'react'; 
 import { useRecoilState } from 'recoil';
 import {nomeNProduto, codigoNProduto, quantidadeNProduto, listaProduto, modalNProduto} from '../../states/produto'
+import { ProdutoCreate } from '../../service/produto';
 
 function Forms(props) {
   const [nome, setNome] = useRecoilState(nomeNProduto)
@@ -13,7 +14,7 @@ function Forms(props) {
 
   const [validated, setValidated] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -22,6 +23,18 @@ function Forms(props) {
     setValidated(true);
     if (form.checkValidity() === true){
       event.preventDefault();
+      const user = JSON.parse(localStorage.getItem("user_token"));
+      const produtoObj = {
+          "dono":user.email,
+          codigo,
+          nome,
+          quantidade
+      }
+      const resp = await ProdutoCreate(produtoObj);
+      if(!resp.status){
+        window.alert(resp.message);
+        return;
+      }
       setProduto([...produtos, {nome, codigo, quantidade}]);
       setNome('');
       setCodigo('');

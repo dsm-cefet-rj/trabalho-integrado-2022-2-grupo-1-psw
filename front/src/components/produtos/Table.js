@@ -3,17 +3,30 @@ import '../../styles/produtos.css';
 import { Button } from 'react-bootstrap';
 import {FaTrashAlt} from 'react-icons/fa'
 import { useRecoilState } from "recoil";
-import { modalGProduto } from "../../states/produto";
+import { listaProduto, modalGProduto } from "../../states/produto";
+import { ProdutoDelete } from '../../service/produto';
 
 function Row(props) {
-  const [GProduto, setmodalGProduto] = useRecoilState(modalGProduto);
+  const [produtos, setProdutos] = useRecoilState(listaProduto)
 
-  function removerProduto() {
-    props.removeHandler(props.obj.index);
-  }
+  async function removerProduto() {
+    const user = JSON.parse(localStorage.getItem("user_token"));
+    let c = window.confirm("deseja apagar está etapa?");
+    if(!c){
+     return;
+    }
 
-  function modalGProdutoON() {
-    setmodalGProduto(true);
+    const resp = await ProdutoDelete({
+      dono:user.email,
+      codigo: props.obj.codigo
+    });
+    if(!resp.status){
+      window.alert(resp.message);
+      return;
+    }
+    let e =  [...produtos]
+    e.splice (parseInt(props.obj.index)-1, 1);
+    setProdutos (e) 
   }
 
   return (
@@ -32,9 +45,6 @@ function Row(props) {
 }
 
 export default function simpleTable(props) {
-  function removeProduto(produto) {
-    props.removeHandler(produto);
-  }
 
   return (
     <div className="border rounded bg-light t-size overflow-auto">
@@ -51,7 +61,7 @@ export default function simpleTable(props) {
         <tbody>
           {props.rows.map((row, i) => {
             return (
-              <Row removeHandler={removeProduto} obj={{ ...row, index: i + 1 }} />
+              <Row obj={{ ...row, index: i + 1 }} />
             );
           })}
         </tbody>
