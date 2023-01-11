@@ -1,92 +1,90 @@
-const ProdutoModel = require('../database/models/produto');
-const EquipeModel = require('../database/models/equipe');
-const UserModel = require('../database/models/user');
+const ProdutoModel = require("../database/models/produto");
+const EquipeModel = require("../database/models/equipe");
+const UserModel = require("../database/models/user");
 
-async function GetService (codigo, email) {
-  try{
-    
-    const produto = await ProdutoModel.findOne({codigo});
-    
-    if(!produto){
-        throw new Error("Produto não encontrado!")
-    }
+async function GetService(codigo, email) {
+  try {
+    const produto = await ProdutoModel.findOne({ codigo });
 
-    return {
-      data:produto
-    }
-  }catch(e){
-      return {error:e}
-  }
-}
-
-async function GetAllService (email) {
-    try{
-      
-      const produto = await ProdutoModel.find({dono:email});
-      
-      if(!produto){
-          throw new Error("Produto não encontrado!")
-      }
-  
-      return {
-        data:produto
-      }
-    }catch(e){
-        return {error:e}
-    }
-  }
-
-async function NewService (dono, nome, codigo, quantidade) {
-  try{
-    const user = await UserModel.findOne({email:dono});
-  
-    if(!user){
+    if (!produto) {
       throw new Error("Produto não encontrado!");
     }
 
-    let produto = await ProdutoModel.findOne({dono, codigo});
-  
-    if(produto){
-      throw new Error("Produto já cadastrado!");
-    }
-
-    produto = await ProdutoModel.create({dono, codigo, nome, quantidade});
-
     return {
-      data:produto
-    }
-  }catch(e){
-    return {error:e}
+      data: produto,
+    };
+  } catch (e) {
+    return { error: e };
   }
 }
 
-async function DeleteService (dono, codigo) {
-    try{
-      const user = await UserModel.findOne({email:dono});
-    
-      if(!user){
-        throw new Error("Produto não encontrado!");
-      }
+async function GetAllService(email) {
+  try {
+    const produto = await ProdutoModel.find({ dono: email });
 
-      const produtoExists = await ProdutoModel.findOne({dono, codigo});
-
-      if(!produtoExists){ 
-        throw new Error("Produto não encontrado!");
-      }
-  
-      const produto = await ProdutoModel.remove({dono, codigo});
-
-      return {
-        data:produto
-      }
-    }catch(e){
-      return {error:e}
+    if (!produto) {
+      throw new Error("Produto não encontrado!");
     }
+
+    return {
+      data: produto,
+    };
+  } catch (e) {
+    return { error: e };
   }
+}
+
+async function NewService(dono, nome, codigo, quantidade) {
+  try {
+    const user = await UserModel.findOne({ email: dono });
+
+    if (!user) {
+      throw new Error("Produto não encontrado!");
+    }
+
+    let produto = await ProdutoModel.findOne({ dono, codigo });
+
+    if (produto) {
+      throw new Error("Produto já cadastrado!");
+    }
+
+    produto = await ProdutoModel.create({ dono, codigo, nome, quantidade });
+
+    return {
+      data: produto,
+    };
+  } catch (e) {
+    return { error: e };
+  }
+}
+
+async function DeleteService(dono, codigo) {
+  try {
+    const user = await UserModel.findOne({ email: dono });
+
+    if (!user) {
+      throw new Error("Produto não encontrado!");
+    }
+
+    const produtoExists = await ProdutoModel.findOne({ dono, codigo });
+
+    if (!produtoExists) {
+      throw new Error("Produto não encontrado!");
+    }
+
+    const produto = await ProdutoModel.remove({ dono, codigo });
+
+    return {
+      data: produto,
+    };
+  } catch (e) {
+    return { error: e };
+  }
+}
 
 module.exports = {
   GetService,
   NewService,
   DeleteService,
-  GetAllService
-}
+  GetAllService,
+};

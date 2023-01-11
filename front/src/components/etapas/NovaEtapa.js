@@ -5,15 +5,14 @@ import { nomeNEtapa, modalNEtapa } from "../../states/etapa";
 import FormsEtapa from "./Forms";
 function NovaEtapa(props) {
   const [AddEtapa, setmodalAddEtapa] = useRecoilState(modalNEtapa);
-  const [nome, setNome] = useRecoilState(nomeNEtapa)
-
+  const [nome, setNome] = useRecoilState(nomeNEtapa);
 
   function modalAddEtapaClose() {
     setmodalAddEtapa(false);
-    setNome('');
+    setNome("");
   }
   return (
-    <Modal show={!! AddEtapa}>
+    <Modal show={!!AddEtapa}>
       <Modal.Header>
         <div className="d-flex flex-row justify-content-between w-100">
           <h1>Nova etapa</h1>

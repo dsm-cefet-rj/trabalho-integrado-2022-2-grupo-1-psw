@@ -7,14 +7,13 @@ import { useRecoilState } from "recoil";
 import Table from "react-bootstrap/Table";
 function NovaEquipe(props) {
   const [AddEquipe, setmodalAddEquipe] = useRecoilState(modalNEquipe);
-  const [nome, setNome] = useRecoilState(nomeNEquipe)
-
+  const [nome, setNome] = useRecoilState(nomeNEquipe);
 
   function modalAddEquipeClose() {
     setmodalAddEquipe(false);
-    setNome('');
+    setNome("");
   }
-  
+
   return (
     <Modal show={!!AddEquipe}>
       <Modal.Header>
@@ -26,7 +25,7 @@ function NovaEquipe(props) {
         </div>
       </Modal.Header>
       <Modal.Body className="container">
-        <FormsEquipe/>
+        <FormsEquipe />
       </Modal.Body>
     </Modal>
   );

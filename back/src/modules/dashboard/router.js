@@ -1,11 +1,11 @@
 //router instance
-const { Router } = require('express');
+const { Router } = require("express");
 const router = Router();
 const {
   GetController,
   NewController,
-  DeleteController
-} = require('./controller')
+  DeleteController,
+} = require("./controller");
 
 router.get("/get/:email", GetController);
 router.post("/new", NewController);

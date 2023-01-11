@@ -12,7 +12,7 @@ body,
   height: 100%;
 }
 
-.GerenciaMembros{
+.GerenciaMembros {
   height: 300px;
   overflow: auto;
 }

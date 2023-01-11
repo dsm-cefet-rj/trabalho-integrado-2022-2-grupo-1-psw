@@ -1,132 +1,125 @@
-const {
-  request,
-  response
-} = require('express');
+const { request, response } = require("express");
 
-const { 
+const {
   GetService,
   DeleteService,
   NewService,
-  GetAllService
-} = require('./service');
+  GetAllService,
+} = require("./service");
 
-async function GetController (req = request, res = response) {
+async function GetController(req = request, res = response) {
   const codigo = req.params.codigo;
-  if(!codigo){
+  if (!codigo) {
     res.send({
-      status:false,
-      message: "Parametros obrigatórios não definidos!"
+      status: false,
+      message: "Parametros obrigatórios não definidos!",
     });
     return;
   }
 
-  const {error, data} = await GetService(codigo);
+  const { error, data } = await GetService(codigo);
 
-  if(error){
+  if (error) {
     res.send({
-      status:false,
-      message: error.message
+      status: false,
+      message: error.message,
     });
     return;
   }
 
   res.send({
-    status:true,
-    data:data
+    status: true,
+    data: data,
   });
-
 }
 
-async function GetAllController (req = request, res = response) {
+async function GetAllController(req = request, res = response) {
   const email = req.params.email;
-  if(!email){
+  if (!email) {
     res.send({
-      status:false,
-      message: "Parametros obrigatórios não definidos!"
+      status: false,
+      message: "Parametros obrigatórios não definidos!",
     });
     return;
   }
 
-  const {error, data} = await GetAllService(email);
+  const { error, data } = await GetAllService(email);
 
-  if(error){
+  if (error) {
     res.send({
-      status:false,
-      message: error.message
+      status: false,
+      message: error.message,
     });
     return;
   }
 
   res.send({
-    status:true,
-    data:data
+    status: true,
+    data: data,
   });
-
 }
 
-async function NewController (req = request, res = response) {
+async function NewController(req = request, res = response) {
   const dono = req.body.dono;
   const nome = req.body.nome;
   const codigo = req.body.codigo;
   const quantidade = req.body.quantidade;
 
-  if(!dono || !codigo || !quantidade || !nome){
+  if (!dono || !codigo || !quantidade || !nome) {
     res.send({
-      status:false,
-      message: "Parametros obrigatórios não definidos!"
+      status: false,
+      message: "Parametros obrigatórios não definidos!",
     });
     return;
   }
 
-  const {error, data} = await NewService(dono, nome, codigo, quantidade);
+  const { error, data } = await NewService(dono, nome, codigo, quantidade);
 
-  if(error){
+  if (error) {
     res.send({
-      status:false,
-      message: error.message
+      status: false,
+      message: error.message,
     });
     return;
   }
 
   res.send({
-    status:true,
-    data:data
+    status: true,
+    data: data,
   });
-
 }
 
-async function DeleteController (req = request, res = response) {
+async function DeleteController(req = request, res = response) {
   const dono = req.body.dono;
   const codigo = req.body.codigo;
 
-  if(!dono || !codigo){
+  if (!dono || !codigo) {
     res.send({
-      status:false,
-      message: "Parametros obrigatórios não definidos!"
+      status: false,
+      message: "Parametros obrigatórios não definidos!",
     });
     return;
   }
 
-  const {error, data} = await DeleteService(dono, codigo);
+  const { error, data } = await DeleteService(dono, codigo);
 
-  if(error){
+  if (error) {
     res.send({
-      status:false,
-      message: error.message
+      status: false,
+      message: error.message,
     });
     return;
   }
 
   res.send({
-    status:true,
-    data:data
+    status: true,
+    data: data,
   });
-
 }
 
 module.exports = {
   GetController,
   NewController,
   DeleteController,
-  GetAllController
-}
+  GetAllController,
+};

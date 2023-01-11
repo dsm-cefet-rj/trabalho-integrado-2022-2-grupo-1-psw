@@ -1,10 +1,10 @@
-import { Button } from 'react-bootstrap';
-import React from 'react';
-import { getBezierPath } from 'reactflow';
+import { Button } from "react-bootstrap";
+import React from "react";
+import { getBezierPath } from "reactflow";
 import { useRecoilState } from "recoil";
-import { edgesAtom } from '../../states/cadeia';
+import { edgesAtom } from "../../states/cadeia";
 
-import './index.css';
+import "./index.css";
 
 const foreignObjectSize = 40;
 
@@ -19,10 +19,8 @@ export default function CustomEdge({
   style = {},
   markerEnd,
 }) {
-
-  
   const [edges, setEdges] = useRecoilState(edgesAtom);
-  
+
   const [edgePath, _labelX, _labelY] = getBezierPath({
     sourceX,
     sourceY,
@@ -36,8 +34,8 @@ export default function CustomEdge({
     evt.stopPropagation();
     let newEdges = [...edges];
 
-    newEdges = newEdges.filter(v => {
-      return v.id !== id
+    newEdges = newEdges.filter((v) => {
+      return v.id !== id;
     });
 
     setEdges(newEdges);
@@ -55,13 +53,18 @@ export default function CustomEdge({
       <foreignObject
         width={foreignObjectSize}
         height={foreignObjectSize}
-        x={targetX - (targetX - sourceX + foreignObjectSize)/2}
-        y={targetY - (targetY - sourceY + foreignObjectSize)/2}
+        x={targetX - (targetX - sourceX + foreignObjectSize) / 2}
+        y={targetY - (targetY - sourceY + foreignObjectSize) / 2}
         className="edgebutton-foreignobject"
         requiredExtensions="http://www.w3.org/1999/xhtml"
       >
         <div>
-          <Button variant={"danger"} size="sm" className="rounded btn-remove" onClick={(event) => RemoveEdge(event, id)}>
+          <Button
+            variant={"danger"}
+            size="sm"
+            className="rounded btn-remove"
+            onClick={(event) => RemoveEdge(event, id)}
+          >
             X
           </Button>
         </div>

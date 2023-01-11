@@ -23,14 +23,21 @@ function Router() {
     <Routes>
       <Route path="/" element={<Signin />} />
       <Route exact path="/signup" element={<Signup />} />
-      <Route path="/cadeias" element={
-        <ReactFlowProvider>
-          <Cadeias />
-        </ReactFlowProvider>
-      } />
+      <Route
+        path="/cadeias"
+        element={
+          <ReactFlowProvider>
+            <Cadeias />
+          </ReactFlowProvider>
+        }
+      />
       <Route exact path="/" element={<Private Item={Dashboard} />} />
       <Route exact path="/equipes" element={<Private Item={Equipes} />} />
-      <Route exact path="/novoProduto" element={<Private Item={NovoProduto} />} />
+      <Route
+        exact
+        path="/novoProduto"
+        element={<Private Item={NovoProduto} />}
+      />
       <Route exact path="/produtos" element={<Private Item={Produtos} />} />
       <Route exact path="/dashboard" element={<Private Item={Dashboard} />} />
       <Route exact path="/etapas" element={<Private Item={Etapas} />} />

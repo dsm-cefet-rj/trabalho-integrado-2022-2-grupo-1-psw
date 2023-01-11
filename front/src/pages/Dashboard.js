@@ -6,34 +6,33 @@ import { EtapaGet } from "../service/etapa";
 import { listaEtapa } from "../states/etapa";
 
 function Dashboard() {
-
   const [mounted, setMounted] = useState(false);
   const [etapas, setEtapas] = useRecoilState(listaEtapa);
 
-  async function loadResources () {
-
+  async function loadResources() {
     const user = JSON.parse(localStorage.getItem("user_token"));
 
     const etapaResource = await EtapaGet(user);
     setEtapas(etapaResource.data);
-    
   }
 
-  useEffect(()=> {
-    if(!mounted){
+  useEffect(() => {
+    if (!mounted) {
       loadResources();
       setMounted(true);
     }
   }, []);
 
-  return <div>
+  return (
     <div>
-      <NavbarComponent />
+      <div>
+        <NavbarComponent />
       </div>
-      <div className='container mt-3'>
+      <div className="container mt-3">
         <CollapsibleTable />
       </div>
-  </div>;
+    </div>
+  );
 }
 
 export default Dashboard;

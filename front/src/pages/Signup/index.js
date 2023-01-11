@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "../../components/Input";
 import * as C from "./styles";
-import Button from 'react-bootstrap/Button';
+import Button from "react-bootstrap/Button";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
@@ -16,19 +16,18 @@ const Signup = () => {
   const { signup } = useAuth();
 
   const isEmail = (email) =>
-  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
+    /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
 
   const handleSignup = async () => {
     if (!email | !senhaConf | !senha | !user) {
       setError("Preencha todos os campos");
       return;
     } else if (senha !== senhaConf) {
-        setError("As senhas não são iguais");
-        return;
-    }
-      else if (!isEmail(email)) {
-        setError ("Formato de email inválido");
-        return;
+      setError("As senhas não são iguais");
+      return;
+    } else if (!isEmail(email)) {
+      setError("Formato de email inválido");
+      return;
     }
 
     const res = await signup(user, email, senha);
@@ -71,8 +70,8 @@ const Signup = () => {
           onChange={(e) => [setSenhaConf(e.target.value), setError("")]}
         />
         <C.labelError>{error}</C.labelError>
-        <Button variant="primary" className='m-2' onClick={handleSignup}>
-        Inscrever-se
+        <Button variant="primary" className="m-2" onClick={handleSignup}>
+          Inscrever-se
         </Button>
         <C.LabelSignin>
           Já tem uma conta?

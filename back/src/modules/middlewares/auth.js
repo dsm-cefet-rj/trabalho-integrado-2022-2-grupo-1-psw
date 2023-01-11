@@ -1,11 +1,11 @@
-const {request, response} = require('express');
+const { request, response } = require("express");
 
-function Authenticate (req = request, res = response, next) {
+function Authenticate(req = request, res = response, next) {
   next();
 }
 
-function Authorizate (req = request, res = response, next) {
+function Authorizate(req = request, res = response, next) {
   next();
 }
 
-module.exports = {Authorizate, Authenticate}
+module.exports = { Authorizate, Authenticate };

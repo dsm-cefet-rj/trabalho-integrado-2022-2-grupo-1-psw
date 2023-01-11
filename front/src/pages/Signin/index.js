@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Input from "../../components/Input";
-import Button from 'react-bootstrap/Button';
+import Button from "react-bootstrap/Button";
 import * as C from "./styles";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
@@ -46,8 +46,8 @@ const Signin = () => {
           onChange={(e) => [setSenha(e.target.value), setError("")]}
         />
         <C.labelError>{error}</C.labelError>
-        <Button variant="primary" className='m-2' onClick={handleLogin}>
-        Entrar
+        <Button variant="primary" className="m-2" onClick={handleLogin}>
+          Entrar
         </Button>
         <C.LabelSignup>
           Não tem uma conta?

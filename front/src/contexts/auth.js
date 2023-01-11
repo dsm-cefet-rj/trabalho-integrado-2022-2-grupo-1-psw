@@ -7,54 +7,49 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
 
   useEffect(() => {
-
     const userToken = JSON.parse(localStorage.getItem("user_token"));
     if (userToken) {
       signin(userToken.email, userToken.pass);
     }
-
   }, []);
 
   const signin = async (email, pass) => {
-
     let userObject = {
       email,
-      pass
-    }
+      pass,
+    };
 
     const result = await UserLogin(userObject);
 
-    if(result['status'] === true){
+    if (result["status"] === true) {
       localStorage.setItem("user_token", JSON.stringify(userObject));
       setUser(userObject);
-
-    }else{
-      return result['message'];
+    } else {
+      return result["message"];
     }
-  }
+  };
 
   const signup = async (username, email, pass) => {
-
     let userObject = {
       username,
       email,
-      pass
-    }
+      pass,
+    };
 
     const result = await UserRegister(userObject);
 
-    if(result.status === true){
+    if (result.status === true) {
       userObject = {
         email: userObject.email,
-        pass: userObject.pass
+        pass: userObject.pass,
       };
 
       localStorage.setItem("user_token", JSON.stringify(userObject));
       setUser(userObject);
-    }else{
-      return result['message'];
+    } else {
+      return result["message"];
     }
-  }
+  };
 
   const signout = () => {
     setUser(null);

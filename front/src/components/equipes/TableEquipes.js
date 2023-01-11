@@ -6,7 +6,6 @@ import { modalGEquipe, listaEquipe } from "../../states/equipe";
 import { EquipeDelete } from "../../service/equipe";
 
 function Row(props) {
-
   const [equipes, setEquipe] = useRecoilState(listaEquipe);
   const [GEquipe, setmodalGEquipe] = useRecoilState(modalGEquipe);
 
@@ -18,11 +17,11 @@ function Row(props) {
     }
 
     const resp = await EquipeDelete({
-      dono:user.email,
-      nome:props.obj.nome
+      dono: user.email,
+      nome: props.obj.nome,
     });
 
-    if(!resp.status){
+    if (!resp.status) {
       window.alert(resp.message);
       return;
     }
@@ -32,7 +31,6 @@ function Row(props) {
     setEquipe(e);
   }
 
-  
   function modalGEquipeON() {
     setmodalGEquipe(true);
   }
@@ -43,22 +41,20 @@ function Row(props) {
       <td className="w-50">{props.obj.nome}</td>
       <td>{props.obj.codigo}</td>
       <td>{props.obj.qtdMembros}</td>
-    
+
       <td>
-      <Button className="p-1 me-3" onClick={modalGEquipeON}>
-        Gerenciar
+        <Button className="p-1 me-3" onClick={modalGEquipeON}>
+          Gerenciar
         </Button>
         <Button className="p-1" onClick={removerEquipe}>
           Remover
         </Button>
-    
       </td>
     </tr>
   );
 }
 
 export default function simpleTable(props) {
-
   return (
     <div className="border rounded bg-light t-size overflow-auto">
       <Table variant="light">
@@ -73,11 +69,7 @@ export default function simpleTable(props) {
         </thead>
         <tbody>
           {props.rows.map((row, i) => {
-            return (
-              <Row
-                obj={{ ...row, index: i + 1 }}
-              />
-            );
+            return <Row obj={{ ...row, index: i + 1 }} />;
           })}
         </tbody>
       </Table>

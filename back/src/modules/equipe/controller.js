@@ -1,7 +1,4 @@
-const {
-  request,
-  response
-} = require('express');
+const { request, response } = require("express");
 
 const {
   GetService,
@@ -11,211 +8,211 @@ const {
   AddMemberService,
   RemoveMemberService,
   AddProdutoService,
-  RemoveProdutoService
-} = require('./service');
+  RemoveProdutoService,
+} = require("./service");
 
-async function GetController (req = request, res = response) {
+async function GetController(req = request, res = response) {
   const nome = req.params.nome;
-  if(!nome){
+  if (!nome) {
     res.send({
-      status:false,
-      message: "Parâmetros obrigatórios não definidos!"
+      status: false,
+      message: "Parâmetros obrigatórios não definidos!",
     });
     return;
   }
 
-  const {error, data} = await GetService(nome);
+  const { error, data } = await GetService(nome);
 
-  if(error){
+  if (error) {
     res.send({
-      status:false,
-      message: error.message
+      status: false,
+      message: error.message,
     });
     return;
   }
 
   res.send({
-    status:true,
-    data:data
+    status: true,
+    data: data,
   });
-
 }
 
-async function GetAllController (req = request, res = response) {
+async function GetAllController(req = request, res = response) {
   const email = req.params.email;
-  if(!email){
+  if (!email) {
     res.send({
-      status:false,
-      message: "Parâmetros obrigatórios não definidos!"
+      status: false,
+      message: "Parâmetros obrigatórios não definidos!",
     });
     return;
   }
 
-  const {error, data} = await GetAllService(email);
+  const { error, data } = await GetAllService(email);
 
-  if(error){
+  if (error) {
     res.send({
-      status:false,
-      message: error.message
-    });
-    return;
-  }
-
-  res.send({
-    status:true,
-    data:data
-  });
-
-}
-
-async function CreateController (req = request, res = response) {
-  
-  if(!req.body.nome || !req.body.dono){
-    res.send({
-      status:false,
-      message: "Parâmetros obrigatórios não definidos!"
-    });
-    return;
-  }
-
-  const {error, data} = await CreateService(req.body.nome, req.body.dono);
-
-  if(error){
-    res.send({
-      status:false,
-      message: error.message
+      status: false,
+      message: error.message,
     });
     return;
   }
 
   res.send({
-    status:true,
-    data:data
+    status: true,
+    data: data,
   });
 }
 
-async function DeleteController (req = request, res = response) {
-  if(!req.body.nome || !req.body.dono){
+async function CreateController(req = request, res = response) {
+  if (!req.body.nome || !req.body.dono) {
     res.send({
-      status:false,
-      message: "Parâmetros obrigatórios não definidos!"
+      status: false,
+      message: "Parâmetros obrigatórios não definidos!",
     });
     return;
   }
 
-  const {error, data} = await DeleteService(req.body.nome, req.body.dono);
+  const { error, data } = await CreateService(req.body.nome, req.body.dono);
 
-  if(error){
+  if (error) {
     res.send({
-      status:false,
-      message: error.message
+      status: false,
+      message: error.message,
     });
     return;
   }
 
   res.send({
-    status:true,
-    message:"Equipe deletada com sucesso!"
+    status: true,
+    data: data,
   });
 }
 
-async function AddMemberController (req = request, res = response) {
-  if(!req.body.equipe || !req.body.email){
+async function DeleteController(req = request, res = response) {
+  if (!req.body.nome || !req.body.dono) {
     res.send({
-      status:false,
-      message: "Parâmetros obrigatórios não definidos!"
+      status: false,
+      message: "Parâmetros obrigatórios não definidos!",
     });
     return;
   }
 
-  const {error} = await AddMemberService(req.body.equipe, req.body.email);
+  const { error, data } = await DeleteService(req.body.nome, req.body.dono);
 
-  if(error){
+  if (error) {
     res.send({
-      status:false,
-      message: error.message
+      status: false,
+      message: error.message,
     });
     return;
   }
 
   res.send({
-    status:true,
-    message:"Membro adicionado com sucesso!"
+    status: true,
+    message: "Equipe deletada com sucesso!",
   });
 }
 
-async function RemoveMemberController (req = request, res = response) {
-  if(!req.body.equipe || !req.body.email){
+async function AddMemberController(req = request, res = response) {
+  if (!req.body.equipe || !req.body.email) {
     res.send({
-      status:false,
-      message: "Parâmetros obrigatórios não definidos!"
+      status: false,
+      message: "Parâmetros obrigatórios não definidos!",
     });
     return;
   }
 
-  const {error} = await RemoveMemberService(req.body.equipe, req.body.email);
+  const { error } = await AddMemberService(req.body.equipe, req.body.email);
 
-  if(error){
+  if (error) {
     res.send({
-      status:false,
-      message: error.message
+      status: false,
+      message: error.message,
     });
     return;
   }
 
   res.send({
-    status:true,
-    message:"Membro removido com sucesso!"
+    status: true,
+    message: "Membro adicionado com sucesso!",
   });
 }
 
-async function AddProdutoController (req = request, res = response) {
-  if(!req.body.equipe || !req.body.codigo){
+async function RemoveMemberController(req = request, res = response) {
+  if (!req.body.equipe || !req.body.email) {
     res.send({
-      status:false,
-      message: "Parâmetros obrigatórios não definidos!"
+      status: false,
+      message: "Parâmetros obrigatórios não definidos!",
     });
     return;
   }
 
-  const {error} = await AddProdutoService(req.body.equipe, req.body.codigo);
+  const { error } = await RemoveMemberService(req.body.equipe, req.body.email);
 
-  if(error){
+  if (error) {
     res.send({
-      status:false,
-      message: error.message
+      status: false,
+      message: error.message,
     });
     return;
   }
 
   res.send({
-    status:true,
-    message:"Produto adicionado com sucesso!"
+    status: true,
+    message: "Membro removido com sucesso!",
   });
 }
 
-async function RemoveProdutoController (req = request, res = response) {
-  if(!req.body.equipe || !req.body.codigo){
+async function AddProdutoController(req = request, res = response) {
+  if (!req.body.equipe || !req.body.codigo) {
     res.send({
-      status:false,
-      message: "Parâmetros obrigatórios não definidos!"
+      status: false,
+      message: "Parâmetros obrigatórios não definidos!",
     });
     return;
   }
 
-  const {error} = await RemoveProdutoService(req.body.equipe, req.body.codigo);
+  const { error } = await AddProdutoService(req.body.equipe, req.body.codigo);
 
-  if(error){
+  if (error) {
     res.send({
-      status:false,
-      message: error.message
+      status: false,
+      message: error.message,
     });
     return;
   }
 
   res.send({
-    status:true,
-    message:"Produto removido com sucesso!"
+    status: true,
+    message: "Produto adicionado com sucesso!",
+  });
+}
+
+async function RemoveProdutoController(req = request, res = response) {
+  if (!req.body.equipe || !req.body.codigo) {
+    res.send({
+      status: false,
+      message: "Parâmetros obrigatórios não definidos!",
+    });
+    return;
+  }
+
+  const { error } = await RemoveProdutoService(
+    req.body.equipe,
+    req.body.codigo
+  );
+
+  if (error) {
+    res.send({
+      status: false,
+      message: error.message,
+    });
+    return;
+  }
+
+  res.send({
+    status: true,
+    message: "Produto removido com sucesso!",
   });
 }
 
@@ -227,5 +224,5 @@ module.exports = {
   RemoveMemberController,
   AddProdutoController,
   RemoveProdutoController,
-  GetAllController
-}
+  GetAllController,
+};

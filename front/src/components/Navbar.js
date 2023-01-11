@@ -6,8 +6,6 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
-
-
 function NavbarComponent() {
   const { signout } = useAuth();
   const navigate = useNavigate();
@@ -26,9 +24,11 @@ function NavbarComponent() {
             <Nav.Link href="Produtos">Produtos</Nav.Link>
             <Nav.Link href="Etapas">Etapas</Nav.Link>
             <Nav.Link href="Equipes">Equipes</Nav.Link>
-          </Nav> 
-          <Nav>   
-              <Nav.Link onClick={() => [signout(), navigate("/")]}>Você está logado | Sair</Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link onClick={() => [signout(), navigate("/")]}>
+              Você está logado | Sair
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

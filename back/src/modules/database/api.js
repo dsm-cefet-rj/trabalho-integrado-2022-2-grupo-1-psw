@@ -1,15 +1,14 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 module.exports = async () => {
+  const uri = !!process.env.DB_URI
+    ? process.env.DB_URI
+    : `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
 
-  const uri = !!process.env.DB_URI ? process.env.DB_URI :
-  `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
-
-  try{
+  try {
     await mongoose.connect(uri);
-    console.log('Database: Connected successfully!');
-
-  }catch(e){
-    console.log('Error: Could not connect to database!', e.message);
+    console.log("Database: Connected successfully!");
+  } catch (e) {
+    console.log("Error: Could not connect to database!", e.message);
   }
-}
+};

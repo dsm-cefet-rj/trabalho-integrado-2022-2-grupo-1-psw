@@ -1,57 +1,45 @@
 import api from "./api";
 
-export async function ProdutoCreate(produtoObject){
-  try{
-
-    const {data} = await api.post('/produto/new', produtoObject);
+export async function ProdutoCreate(produtoObject) {
+  try {
+    const { data } = await api.post("/produto/new", produtoObject);
     return data;
-
-  }catch(e){
-    
+  } catch (e) {
     return {
-      status:false,
-      message: e.message
-    }
-
+      status: false,
+      message: e.message,
+    };
   }
 }
 
-export function ProdutoLoad(produtoObject){
-  api.get('/produto/get', produtoObject)
+export function ProdutoLoad(produtoObject) {
+  api.get("/produto/get", produtoObject);
 }
 
-export async function ProdutoLoadAll(userObject){
-  try{
-
-    const {data} = await api.get('/produto/get-all/'+userObject.email);
+export async function ProdutoLoadAll(userObject) {
+  try {
+    const { data } = await api.get("/produto/get-all/" + userObject.email);
     return data;
-
-  }catch(e){
-    
+  } catch (e) {
     return {
-      status:false,
-      message: e.message
-    }
-
+      status: false,
+      message: e.message,
+    };
   }
 }
 
-export function ProdutoSave(produtoObject){
-  api.post('/produto/update', produtoObject)
+export function ProdutoSave(produtoObject) {
+  api.post("/produto/update", produtoObject);
 }
 
-export async function ProdutoDelete(produtoObject){
-  try{
-
-    const {data} = await api.post('/produto/delete', produtoObject)
+export async function ProdutoDelete(produtoObject) {
+  try {
+    const { data } = await api.post("/produto/delete", produtoObject);
     return data;
-
-  }catch(e){
-    
+  } catch (e) {
     return {
-      status:false,
-      message: e.message
-    }
-
+      status: false,
+      message: e.message,
+    };
   }
 }

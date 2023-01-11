@@ -1,12 +1,12 @@
 //router instance
-const { Router } = require('express');
+const { Router } = require("express");
 const router = Router();
 const {
   GetController,
   NewController,
   DeleteController,
-  GetAllController
-} = require('./controller')
+  GetAllController,
+} = require("./controller");
 
 router.get("/get/:codigo?", GetController);
 router.get("/get-all/:email?", GetAllController);

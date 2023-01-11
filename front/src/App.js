@@ -8,17 +8,17 @@ import { AuthProvider } from "./contexts/auth";
 function App() {
   return (
     <RecoilRoot>
-    <AuthProvider>
-    <BrowserRouter>
-      <div className="pd-auto h-100">
-        <Router />
-        <div className="fixed-bottom"><Footer /></div>
-      </div>
-    </BrowserRouter>
-    </AuthProvider>
-
-
-</RecoilRoot>
+      <AuthProvider>
+        <BrowserRouter>
+          <div className="pd-auto h-100">
+            <Router />
+            <div className="fixed-bottom">
+              <Footer />
+            </div>
+          </div>
+        </BrowserRouter>
+      </AuthProvider>
+    </RecoilRoot>
   );
 }
 

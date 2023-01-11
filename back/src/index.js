@@ -1,21 +1,21 @@
-const http = require('http');
+const http = require("http");
 
-require('dotenv').config();
+require("dotenv").config();
 
-const db = require('./modules/database/api')();
+const db = require("./modules/database/api")();
 
 main();
 
-async function main () {
-
+async function main() {
   await db;
 
-  const server = require('./express.config');
+  const server = require("./express.config");
 
   const app = http.createServer(server);
 
   app.listen(process.env.PORT, process.env.HOST, () => {
-    console.log(`Server listening on http://${process.env.HOST}:${process.env.PORT}/`)
+    console.log(
+      `Server listening on http://${process.env.HOST}:${process.env.PORT}/`
+    );
   });
-
 }
