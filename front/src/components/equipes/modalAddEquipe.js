@@ -4,7 +4,7 @@ import { Modal, Button } from "react-bootstrap";
 import FormsEquipe from "./FormsEquipe";
 import { nomeNEquipe, modalNEquipe } from "../../states/equipe";
 import { useRecoilState } from "recoil";
-
+import Table from "react-bootstrap/Table";
 function NovaEquipe(props) {
   const [AddEquipe, setmodalAddEquipe] = useRecoilState(modalNEquipe);
   const [nome, setNome] = useRecoilState(nomeNEquipe)
