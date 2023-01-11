@@ -4,7 +4,6 @@ import { Button } from "react-bootstrap";
 import Equipes from "../../pages/Equipes";
 import { useRecoilState } from "recoil";
 import { modalGEquipe } from "../../states/equipe";
-
 function Row(props) {
 
   const [GEquipe, setmodalGEquipe] = useRecoilState(modalGEquipe);

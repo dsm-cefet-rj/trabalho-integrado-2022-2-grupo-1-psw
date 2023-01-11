@@ -11,3 +11,8 @@ body,
   background-color: #efefef;
   height: 100%;
 }
+
+.GerenciaMembros{
+  height: 300px;
+  overflow: auto;
+}
