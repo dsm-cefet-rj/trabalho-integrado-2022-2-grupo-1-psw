@@ -29,5 +29,5 @@ const str = localStorage.getItem('listaEquipe') ? localStorage.getItem('listaEqu
 
   export const equipeGerenciada = atom({
     key:'equipeGerenciada',
-    default:'',
+    default:null,
   });

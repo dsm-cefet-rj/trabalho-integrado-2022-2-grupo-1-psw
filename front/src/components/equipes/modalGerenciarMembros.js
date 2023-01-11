@@ -2,15 +2,24 @@ import React from "react";
 import "../../styles/modalAddEquipe.css";
 import { Modal, Button } from "react-bootstrap";
 import FormsEquipe from "./FormsEquipe";
-import { nomeNEquipe, modalGEquipe} from "../../states/equipe";
+import {
+  listaEquipe as listaEquipeAtom,
+  modalGEquipe,
+  equipeGerenciada as equipeGerenciadaAtom
+} from "../../states/equipe";
 import { useRecoilState } from "recoil";
-import FormsAdicionarMembro from "../equipes/FormsAdicionarMembro"
+import FormsAdicionarMembro from "../equipes/FormsAdicionarMembro";
+
 function GerenciarEquipe(props) {
+
+  const [listaEquipe, setListaEquipe] = useRecoilState(listaEquipeAtom);
+  const [equipeGerenciada, setEquipeGerenciada] = useRecoilState(equipeGerenciadaAtom);
   const [GEquipe, setmodalGEquipe] = useRecoilState(modalGEquipe);
   
 
   function modalGEquipeClose() {
     setmodalGEquipe(false);
+    setEquipeGerenciada(null);
   }
   
   return (

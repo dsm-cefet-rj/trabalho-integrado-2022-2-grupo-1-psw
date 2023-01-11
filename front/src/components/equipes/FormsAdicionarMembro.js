@@ -3,8 +3,7 @@ import Form from "react-bootstrap/Form";
 import { useRecoilState } from 'recoil';
 import React, { useState } from 'react'; 
 import {emailConvite} from "../../states/equipe";
-import { maskEmail } from 'react-email-mask'
-import 'react-email-mask/dist/index.css'
+import 'react-email-mask/dist/index.css';
 
 
 function AdicionarMembro(){
