@@ -5,4 +5,5 @@
 th {
   position: sticky;
   top: 0;
+  cursor: pointer;
 }

@@ -5,19 +5,31 @@ import NovaEtapa from "../components/etapas/NovaEtapa.js";
 import { useRecoilState } from "recoil";
 import {modalNEtapa, listaEtapa} from '../states/etapa'
 import NavbarComponent from "../components/Navbar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { EtapaGet } from "../service/etapa.js";
 
 function Etapas() {
+  const [mounted, setMounted] = useState(false);
+
   const [modal, setModal] = useRecoilState(modalNEtapa);
   const [etapas, setEtapas] = useRecoilState(listaEtapa);
 
   function NovaEtapaModal() {
     setModal(true);
   }
-  
+
+  async function loadResources () {
+    const user = JSON.parse(localStorage.getItem("user_token"));
+    const etapaResource = await EtapaGet(user);
+    setEtapas(etapaResource.data);
+    setMounted(true);
+  }
+
   useEffect(()=> {
-    localStorage.setItem('listaEtapa', JSON.stringify(etapas))
-  }, [etapas])
+    if(!mounted){
+      loadResources();
+    }
+  }, []);
 
   return (
     <div>

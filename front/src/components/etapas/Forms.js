@@ -3,17 +3,28 @@ import Form from "react-bootstrap/Form";
 import { useRecoilState } from 'recoil';
 import React, { useState } from 'react';
 import {nomeNEtapa, duracaoNEtapa,modalNEtapa, listaEtapa} from '../../states/etapa'
+import { EtapaCreate } from "../../service/etapa";
 
 function FormsEtapa(props) {
   const [nome, setNome] = useRecoilState(nomeNEtapa);
   const [duracao, setDuracao] = useRecoilState(duracaoNEtapa);
-  const [AddEtapa, setmodalAddEtapa] = useRecoilState(modalNEtapa);
+  const [_AddEtapa, setmodalAddEtapa] = useRecoilState(modalNEtapa);
   const [validated, setValidated] = useState(false);
   const [etapas, setEtapa] = useRecoilState(listaEtapa);
   /*function retornaEtapa() {
     let etapa = { nome, duracao };
     props.novoHandler(etapa);
   } */
+
+  const createEtapa = async (etapa) => {
+    const user = JSON.parse(localStorage.getItem("user_token"));
+    const etapaResource = await EtapaCreate({...etapa, dono:user.email, ordem:etapas.length});
+    if(!!etapaResource.status){
+      setEtapa([...etapas, {nome:etapa.nome, duracao:etapa.duracao}]);
+    }else{
+      window.confirm(etapaResource.message);
+    }
+  }
 
 const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -24,7 +35,7 @@ const handleSubmit = (event) => {
     setValidated(true);
     if (form.checkValidity() === true){
       event.preventDefault();
-      setEtapa([...etapas, {nome, duracao}]);
+      createEtapa({nome, duracao})
       setNome('');
       setmodalAddEtapa(false);
     }
@@ -48,7 +59,7 @@ const handleSubmit = (event) => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formDuracao">
-        <Form.Label>Duração</Form.Label>
+        <Form.Label>Duração (Dias)</Form.Label>
         <Form.Control
         required
           value={duracao}

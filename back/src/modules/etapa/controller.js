@@ -40,7 +40,7 @@ async function GetController (req = request, res = response) {
 async function NewController (req = request, res = response) {
   const dono = req.body.dono;
   const nome = req.body.nome;
-  const ordem = req.body.ordem;
+  const ordem = req.body.ordem.toString();
   const duracao = req.body.duracao;
 
   if(!dono || !nome || !ordem || !duracao){
